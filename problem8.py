@@ -261,8 +261,8 @@ class Problem8(Problem):
         de_printat += test_probl.solve_b() 
         de_printat += test_probl.solve_c() 
         de_printat += test_probl.solve_d() 
-       # [print(x) for x in de_printat]
-       return de_printat
+        # [print(x) for x in de_printat]
+        return de_printat
     
 
 
