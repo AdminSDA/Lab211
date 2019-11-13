@@ -133,7 +133,23 @@ class Problem5(Problem):
             return rad # returneaza noua radacina
 
         solution = solution + "\n"
+        solution=solution + "Arborele initial este:\n\n"
+        
+        # functie care returneaza in solution:
+        def afisare(rad,nivel):
+            sol=str(rad.val)+"   " # introduce valoarea radacinii curente in sol 
+            if rad.fiu_drept is None:
+                sol=sol+"\n   " # daca nu are fiu in dreapta, trece la linia urmatoare
+            else:
+                sol=sol+afisare(rad.fiu_drept,nivel+1) # altfel,apeleaza functia pentru fiul din dreapta al radacinii curente si pune rezultatul in sol
+            if rad.fiu_stang is not None: # daca nu are fiu in stanga
+                for i in range(1,nivel+2):
+                    sol=sol+"   " # creste numarul de spatii
+                sol=sol+afisare(rad.fiu_stang,nivel+1) # apeleaza functia pentru fiul din stanga si pune rezultatul in sol
+            return sol
 
+        solution=solution+str(afisare(A,0))+"\n\n"
+        
         # functie pentru afisare din consola:
         def afisare_arbore(rad,space):
             if rad is None: # daca am terminat de parcurs arborele, iese
@@ -151,10 +167,11 @@ class Problem5(Problem):
         afisare_arbore(A, " ")
         print()
         A=stergere(A,nr) # stergem nodul nr din arborele a carui radacina este A
+        solution = solution + "Arborele final este:\n\n"
+        solution = solution + str(afisare(A, 0))
         print("Arborele final este (inordine):")
         inordine(A)
         print()
         print("Arborele final este:")
         afisare_arbore(A, " ")
         return solution
-
