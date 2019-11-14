@@ -1,6 +1,6 @@
 import queue
 import random
-from modules.Node import Nod
+from modules.node import Nod
 from problem import Problem
 
 def sdr(root, v3):
