@@ -54,7 +54,7 @@ class Problem3(Problem):
                                         contor += 1;
                                        
                             elif contor != 1:
-                                    e=data1[contor-1]
+                                    e=data1[contor-i]
                                     solution += 'Se va elimina din stiva numarul ' + str(e) + ' avand contor = ' + str(contor) + '\n'
                                     p(arr,stack);
                                     i = i + 1;
