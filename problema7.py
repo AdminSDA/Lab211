@@ -139,7 +139,7 @@ def afisare(root, nrNivele):
 class Problem7 (Problem):
     def __init__(self):
         statement = ""
-        num_nod = random.randrange(4,13,1)
+        num_nod = 7
         v = random.sample(range(1, 30), num_nod)
 
         v1 = []
