@@ -28,8 +28,11 @@ class Problem3(Problem):
         stack = data;
         i=1;
         n=len(stack);
-        e=div2(n);
-        contor=e;
+        if n <= 3:
+               k=randint(1,3);
+          else:
+               k=randint(int(n/2), n-3);
+        contor=e=k;
         vec=[];
         while(i<n):
                   p1(stack,contor,vec);
@@ -52,12 +55,8 @@ class Problem3(Problem):
           ok = 0; #ok := verifica daca s-a citit pana la k (k actioneaza ca un separator)
           i = 0;
           contor = 1;
+          k=self.k
           n = n-1;
-         
-          if n <= 3:
-               k=randint(1,3);
-          else:
-               k=randint(int(n/2), n-3);
           solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
           solution +='Operatiile folosite sunt: \n'
           while i <= n:
