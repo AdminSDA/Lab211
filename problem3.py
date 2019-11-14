@@ -39,7 +39,7 @@ class Problem3(Problem):
                k=randint(1,3);
           else:
                k=randint(int(n/2), n-3);
-          solution +='Se va folosi raportul ' + str(k/n*100) + '% si ' + str((n-k)/n*100) + '% \n'     
+          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'     
           while i <= n:
                       if i <= k:
                             if ok == 0:
@@ -54,7 +54,7 @@ class Problem3(Problem):
                                         contor += 1;
                                        
                             elif contor != 1:
-                                    e=data1[contor-1];
+                                    e=stack[contor-1];
                                     solution += 'Se va elimina din stiva numarul ' + str(e) + '\n'
                                     p(arr,stack);
                                     i = i + 1;
