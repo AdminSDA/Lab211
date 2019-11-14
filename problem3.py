@@ -18,8 +18,6 @@ class Problem3(Problem):
         statement += 'numar -> se inseaza numarul in stiva \n'
         statement += 'P -> se extrage un numar din stiva si se afiseaza \n'
         statement += 'Introduceti in stiva urmatoarele numere: ' 
-        
-       
         data=[];
         n=randint(3, 99);  
         for i in range (1, n):
@@ -34,29 +32,24 @@ class Problem3(Problem):
                k=randint(int(n/2), n-3);
         contor=e=k;
         vec=[];
-        while(i<n):
+        while i < n:
                   p1(stack,contor,vec);
-                  if(i<e):
+                  if i < e:
                       contor-=1;
-                  i+=1;
-                                                       
+                  i = i + 1
         p1(stack,contor-1,vec);
-        
         statement += str(vec);
         statement += "\n"
         super().__init__(statement, data)
        
     def solve(self):
           solution = 'Vom parcurge vectorul\n'
-          n = len(self.data); 
-          data1=self.data;
+          n = len(self.data) - 1; 
           stack = [];
           arr = [];
-          ok = 0; #ok := verifica daca s-a citit pana la k (k actioneaza ca un separator)
-          i = 0;
+          i=ok=0;
           contor = 1;
           k=self.k
-          n = n-1;
           solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
           solution +='Operatiile folosite sunt: \n'
           while i <= n:
@@ -73,7 +66,6 @@ class Problem3(Problem):
                                         contor += 1;
                                        
                             elif contor-i != 0:
-                                    e=data1[contor-i]
                                     solution += 'p()\n'
                                     p(arr,stack);
                                     i = i + 1;
@@ -87,13 +79,13 @@ class Problem3(Problem):
                                 break;
                             e = self.data[contor];
                             numar(e,stack);
-                            solution+='numar('+str(e)+')\n'
-                            solution+='p()\n'
+                            solution += 'numar('+str(e)+')\n'
+                            solution += 'p()\n'
                            
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
                                
-          solution+='p()\n'  
+          solution += 'p()\n'   
           p(arr,stack);
           return solution
