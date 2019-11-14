@@ -302,8 +302,6 @@ class Problem7 (Problem):
         afisare(root, nrNivele)
         return solution
 
-print(Problem7().solve())
-
 
 
 
