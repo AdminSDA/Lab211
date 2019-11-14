@@ -24,8 +24,7 @@ class Problem3(Problem):
         
     def solve(self):
           solution = 'Vom parcurge vectorul\n'
-          solution += 'Se vor citi, in ordine, urmatoarele numere: \n'
-          n = len(data);       
+          n = len(self.data);       
           stack = [];
           arr = [];
           ok = 0; #ok := verifica daca s-a citit pana la k (k actioneaza ca un separator)
@@ -38,10 +37,10 @@ class Problem3(Problem):
           else:
                k=radint(int(n/2), n-3);
                
-          while i <= n: #O(n^2)
+          while i <= n: 
                       if i <= k:
                             if ok == 0:
-                                   e = data[i]
+                                   e = self.data[i]
                                    numar(e,stack)
                                    solution +='S-a introdus in stiva numarul ' + str(e) + ' lungimea fiind ' + str(len(stack)) + '\n'
                                    if i == k:
@@ -52,7 +51,7 @@ class Problem3(Problem):
                                         contor += 1;
                                        
                             elif contor != 1:
-                                    solution += 'Se va elimina din stiva numarul ' + str(data[contor-1]) + '\n'
+                                    solution += 'Se va elimina din stiva numarul ' + str(self.data[contor-1]) + '\n'
                                     p(arr,stack);
                                     i = i + 1;
                                     contor -= 1
@@ -63,10 +62,10 @@ class Problem3(Problem):
                       else:
                             if contor == n:
                                 break;
-                            e = data[contor];
+                            e = self.data[contor];
                             numar(e,stack);
                             solution +='S-a introdus in stiva numarul ' + str(e) + '\n'
-                            solution += 'Se va elimina din stiva numarul ' + str(data[contor-1]) + '\n'
+                            solution += 'Se va elimina din stiva numarul ' + str(self.data[contor-1]) + '\n'
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
