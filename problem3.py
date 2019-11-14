@@ -84,5 +84,6 @@ class Problem3(Problem):
           p(arr,stack);
          
           solution += 'Rezultatul final este : ' + str(arr) + '\n'
-          solution += 'Operatiile folosite sunt: ' + ' '.join(afisare_operatii);
+          et = ' '.join(afisare_operatii)
+          solution += 'Operatiile folosite sunt: ' + et + '\n'
           return solution
