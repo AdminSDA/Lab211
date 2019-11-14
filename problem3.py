@@ -77,4 +77,4 @@ class Problem3(Problem):
           p(arr,stack);
           
           solution += 'Rezultatul final este : ' + str(arr) + '\n'
-          return(solution);
+          return solution 
