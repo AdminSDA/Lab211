@@ -223,3 +223,12 @@ class Problem8(Problem):
             solution += str(sir) + '\n'
 
         return solution, sir
+    
+    def solve(self):
+        solve_a = self.solve_a()
+        solve_b = self.solve_b()
+        solve_c = self.solve_c()
+        solve_d = self.solve_d()
+        return solve_a + solve_b + solve_c + solve_d
+    
+    
