@@ -39,13 +39,14 @@ class Problem3(Problem):
                k=randint(1,3);
           else:
                k=randint(int(n/2), n-3);
-          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'     
+          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n' 
+          afisare_operatii=[];
           while i <= n:
                       if i <= k:
                             if ok == 0:
                                    e = self.data[i]
                                    numar(e,stack)
-                                   solution +='S-a introdus in stiva numarul ' + str(e) + ' lungimea fiind ' + str(len(stack)) + '\n'
+                                   afisare_operatii.append('n(' + str(e) + ')')
                                    if i == k:
                                               ok = 1;
                                               i = 1;
@@ -53,9 +54,9 @@ class Problem3(Problem):
                                         i = i + 1;
                                         contor += 1;
                                        
-                            elif contor != 1:
+                            elif contor-i != 0:
                                     e=data1[contor-i]
-                                    solution += 'Se va elimina din stiva numarul ' + str(e) + ' avand contor = ' + str(contor) + '\n'
+                                    afisare_operatii.append('p()');
                                     p(arr,stack);
                                     i = i + 1;
                                     contor = contor - 1;
@@ -68,14 +69,15 @@ class Problem3(Problem):
                                 break;
                             e = self.data[contor];
                             numar(e,stack);
-                            solution +='S-a introdus in stiva numarul ' + str(e) + '\n'
-                            solution += 'Se va elimina din stiva numarul ' + str(e) + '\n'
+                            afisare_operatii.append('n(' + str(e) + ')')
+                            afisare_operatii.append('p()');
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
                                
-          solution += 'Se va elimina din stiva numarul ' + str(stack[0]) + '\n'  
+          afisare_operatii.append('p()');  
           p(arr,stack);
          
           solution += 'Rezultatul final este : ' + str(arr) + '\n'
+          solution += 'Operatiile folosite sunt: ' + afisare_operatii
           return solution
