@@ -7,21 +7,40 @@ def numar(x,stack):
  
 def p(arr,stack):
      arr.append(stack.pop()); #O(n)
+     
+
+def p1(stack,x,vec):
+     vec.append(stack.pop(x));
  
 class Problem3(Problem):
     def __init__(self):
         statement = '3. Primiti o stiva. Operatii: \n'
         statement += 'numar -> se inseaza numarul in stiva \n'
         statement += 'P -> se extrage un numar din stiva si se afiseaza \n'
-        statement += 'Introduceti in stiva urmatoarele numere: '
+        statement += 'Introduceti in stiva urmatoarele numere: ' 
         
        
         data=[];
         n=randint(3, 99);  
         for i in range (1, n):
           data.append(randint(1, 99));
+        statement += 'si determinati operatiile pentru care se afiseaza: '
+        stack = data;
+        i=1;
+        n=len(stack);
+        e=div2(n);
+        contor=e;
+        vec=[];
+        while(i<n):
+                  p1(stack,contor,vec);
+                  if(i<e):
+                      contor-=1;
+                  i+=1;
+                                                       
+        p1(stack,contor-1,vec);
         
-        statement += str(data) + '. Si folosind urmatorul pattern pt exemplul 12345 -> 32451, calculati si afisati numarul \n\n\n'
+        statement += str(vec);
+        statement += "\n"
         super().__init__(statement, data)
        
     def solve(self):
@@ -39,16 +58,14 @@ class Problem3(Problem):
                k=randint(1,3);
           else:
                k=randint(int(n/2), n-3);
-          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n' 
-          afisare_operatii=[];
+          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
+          solution +='Operatiile folosite sunt: \n'
           while i <= n:
                       if i <= k:
                             if ok == 0:
                                    e = self.data[i]
                                    numar(e,stack)
-                                   e_string='n(' + str(e) + ')'
-                                   afisare_operatii.append(e_string)
-                      
+                                   solution += 'numar(' + str(e) + ')\n'
                                    if i == k:
                                               ok = 1;
                                               i = 1;
@@ -58,8 +75,7 @@ class Problem3(Problem):
                                        
                             elif contor-i != 0:
                                     e=data1[contor-i]
-                                    e_string='p()'
-                                    afisare_operatii.append(e_string);
+                                    solution += 'p()\n'
                                     p(arr,stack);
                                     i = i + 1;
                                     contor = contor - 1;
@@ -72,18 +88,13 @@ class Problem3(Problem):
                                 break;
                             e = self.data[contor];
                             numar(e,stack);
-                            e_string='n(' + str(e) + ')'
-                            afisare_operatii.append(e_string)
-                            e_string='p()'
-                            afisare_operatii.append(e_string);
+                            solution+='numar('+str(e)+')\n'
+                            solution+='p()\n'
+                           
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
                                
-          afisare_operatii.append('p()');  
+          solution+='p()\n'  
           p(arr,stack);
-         
-          solution += 'Rezultatul final este : ' + str(arr) + '\n'
-          et = ' '.join(afisare_operatii)
-          solution += 'Operatiile folosite sunt: ' + et + '\n'
           return solution
