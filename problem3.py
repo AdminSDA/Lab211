@@ -26,7 +26,8 @@ class Problem3(Problem):
        
     def solve(self):
           solution = 'Vom parcurge vectorul\n'
-          n = len(self.data);      
+          n = len(self.data); 
+          data1=self.data;
           stack = [];
           arr = [];
           ok = 0; #ok := verifica daca s-a citit pana la k (k actioneaza ca un separator)
@@ -53,7 +54,7 @@ class Problem3(Problem):
                                         contor += 1;
                                        
                             elif contor != 1:
-                                    e=self.data[contor-1];
+                                    e=data1[contor-1];
                                     solution += 'Se va elimina din stiva numarul ' + str(e) + '\n'
                                     p(arr,stack);
                                     i = i + 1;
