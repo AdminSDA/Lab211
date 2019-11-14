@@ -1,20 +1,12 @@
-#Proiect SDA: Condrat Mihai, Guiţă Oana, Mihalea Andreas (Grupa 211).
-
-from random import randint
 from problem import Problem
+import random
+from random import randint
 
 def numar(x,stack):
      stack.append(x); #O(n)
  
 def p(arr,stack):
      arr.append(stack.pop()); #O(n)
-     
-def div2(a):
-     if a%2 == 0:
-          return int(a/2-1);
-     else:
-          return int(a/2);
- 
 
 class Problem3(Problem):
     def __init__(self):
@@ -25,29 +17,34 @@ class Problem3(Problem):
         statement += '\n\n\n'
         
         data=[];
-        n=randint(3,99);  
-        for i in range (1,n):
-          data.append(randint(1,99));
+        n=randint(3, 99);  
+        for i in range (1, n):
+          data.append(randint(1, 99));
         super().__init__(statement, data)
         
     def solve(self):
           solution = 'Vom parcurge vectorul\n'
-          solution += 'Se va citi in ordine urmatoarele numere: \n'
-          n = len(data);    
-          print(data);    
+          solution += 'Se vor citi, in ordine, urmatoarele numere: \n'
+          n = len(data);       
           stack = [];
           arr = [];
-          ok = 0; #ok := verifica daca s-a citit pana la prima jumatate
+          ok = 0; #ok := verifica daca s-a citit pana la k (k actioneaza ca un separator)
           i = 0;
           contor = 1;
           n = n-1;
+          
+          if n <= 3:
+               k=radint(1,3);
+          else:
+               k=radint(int(n/2), n-3);
+               
           while i <= n: #O(n^2)
-                      if i <= div2(n):
+                      if i <= k:
                             if ok == 0:
                                    e = data[i]
                                    numar(e,stack)
                                    solution +='S-a introdus in stiva numarul ' + str(e) + ' lungimea fiind ' + str(len(stack)) + '\n'
-                                   if i == div2(n):
+                                   if i == k:
                                               ok = 1;
                                               i = 1;
                                    else:
@@ -59,8 +56,9 @@ class Problem3(Problem):
                                     p(arr,stack);
                                     i = i + 1;
                                     contor -= 1
+                                        
                             if ok == 1 & contor == 1: 
-                                    contor = div2(n) + 1;
+                                    contor = k + 1;
                                    
                       else:
                             if contor == n:
@@ -77,4 +75,4 @@ class Problem3(Problem):
           p(arr,stack);
           
           solution += 'Rezultatul final este : ' + str(arr) + '\n'
-          return solution 
+          return solution
