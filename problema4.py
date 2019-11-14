@@ -12,7 +12,7 @@ class Stack:
    def length(self):
        return len(self.array)
    def afisare(self):
-       print self.array
+       print(self.array)
 
 class Queue:
    def __init__(self, array):
@@ -26,7 +26,7 @@ class Queue:
    def length(self):
        return len(self.array)
    def afisare(self):
-       print self.array
+       print(self.array)
 
 class Problem4:
    def __init__(self, statement, count, array,k):
@@ -71,9 +71,9 @@ def print_state(queue, stack):
     queue_str += "<--"
   else:
     queue_str += "Coada este goala."
-  print stack_str
-  print queue_str
-  print "\tCoada 2\t\tCoada este goala."
+  print(stack_str)
+  print(queue_str)
+  print("\tCoada 2\t\tCoada este goala.")
 
 pb = generate()
 q = Queue([])
@@ -87,61 +87,61 @@ k = pb.k
 
 for i in range (0, n):
     s.push(array[i])
-print pb.statement
-print "-------- Rezolvare --------\n\nAvem initial:"
+print(pb.statement)
+print("-------- Rezolvare --------\n\nAvem initial:")
 print_state(q, s)
 
 if s.top() != k:
-    print "\n____________________________________________________"
-    print "Vom introduce in coada 1 toate elementele de pe stiva,"
-    print "ce se afla deasupra elementului de scos\n"
+    print("\n____________________________________________________")
+    print("Vom introduce in coada 1 toate elementele de pe stiva,")
+    print("ce se afla deasupra elementului de scos\n")
     while s.top()!=k:
         q.push(s.top())
-        print "\nAplicam operatia P " + str(s.top())
+        print("\nAplicam operatia P " + str(s.top()))
         s.pop()  #am bagat prima jumate in coada
         print_state(q, s)
-    print "______________________________________"
-    print "Vom scoate elementul cerut de pe stiva"
-    print "\nAplicam operatia S " + str(s.top())
+    print("______________________________________")
+    print("Vom scoate elementul cerut de pe stiva")
+    print("\nAplicam operatia S " + str(s.top()))
     s.pop()
     print_state(q, s)
     if s.length() != 0:
-        print "______________________________________________________"
-        print "Introducem in coada 1 toate elementele ramase pe stiva"
+        print("______________________________________________________")
+        print("Introducem in coada 1 toate elementele ramase pe stiva")
     while s.length() != 0:
         q.push(s.top())
-        print "\nAplicam operatia P " + str(s.top())
+        print("\nAplicam operatia P " + str(s.top()))
         s.pop() #am bagat a 2a jum in coada
         print_state(q, s)
-    print "\n"
-    print "______________________________________________________"
-    print "Introducem toate elementele din coada 1, in ordine, pe stiva\n"
+    print("\n")
+    print("______________________________________________________")
+    print("Introducem toate elementele din coada 1, in ordine, pe stiva\n")
     while q.length() != 0:
         s.push(q.top()) #am bagat toata coada in stiva
-        print "\nAplicam operatia I_1 " + str(s.top())
+        print("\nAplicam operatia I_1 " + str(s.top()))
         q.pop()
         print_state(q, s)
-    print "\n"
-    print "_______________________________________________"
-    print "Scoatem toate elementele de pe stiva, in ordine"
-    print "si le introducem in coada 1\n"
+    print("\n")
+    print("_______________________________________________")
+    print("Scoatem toate elementele de pe stiva, in ordine")
+    print("si le introducem in coada 1\n")
     while s.length() != 0: #am bagat toata stiva in coada
         q.push(s.top())
-        print "\nAplicam operatia P " + str(s.top())
+        print("\nAplicam operatia P " + str(s.top()))
         s.pop()
         print_state(q, s)
-    print "\n"
-    print "______________________________________________________"
-    print "Introducem toate elementele din coada 1, in ordine, pe stiva\n"
+    print("\n")
+    print("______________________________________________________")
+    print("Introducem toate elementele din coada 1, in ordine, pe stiva\n")
     while q.length() != 0:
         s.push(q.top()) #am bagat toata coada in stiva
-        print "\nAplicam operatia I_1 " + str(s.top())
+        print("\nAplicam operatia I_1 " + str(s.top()))
         q.pop()
         print_state(q, s)
-    print "\n"
+    print("\n")
 else:
-    print "\n___________________________________________"
-    print "Elementul de scos se afla in varful stivei,"
-    print "deci vom aplica operatia S " + str(s.top()) + "\n"
+    print("\n___________________________________________")
+    print("Elementul de scos se afla in varful stivei,")
+    print("deci vom aplica operatia S " + str(s.top()) + "\n")
     s.pop()
     print_state(q, s)
