@@ -46,7 +46,9 @@ class Problem3(Problem):
                             if ok == 0:
                                    e = self.data[i]
                                    numar(e,stack)
-                                   afisare_operatii.append('n(' + str(e) + ')')
+                                   e_string='n(' + str(e) + ')'
+                                   afisare_operatii.append(e_string)
+                      
                                    if i == k:
                                               ok = 1;
                                               i = 1;
@@ -56,7 +58,8 @@ class Problem3(Problem):
                                        
                             elif contor-i != 0:
                                     e=data1[contor-i]
-                                    afisare_operatii.append('p()');
+                                    e_string='p()'
+                                    afisare_operatii.append(e_string);
                                     p(arr,stack);
                                     i = i + 1;
                                     contor = contor - 1;
@@ -69,8 +72,10 @@ class Problem3(Problem):
                                 break;
                             e = self.data[contor];
                             numar(e,stack);
-                            afisare_operatii.append('n(' + str(e) + ')')
-                            afisare_operatii.append('p()');
+                            e_string='n(' + str(e) + ')'
+                            afisare_operatii.append(e_string)
+                            e_string='p()'
+                            afisare_operatii.append(e_string);
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
