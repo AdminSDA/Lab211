@@ -13,13 +13,15 @@ class Problem3(Problem):
         statement = '3. Primiti o stiva. Operatii: \n'
         statement += 'numar -> se inseaza numarul in stiva \n'
         statement += 'P -> se extrage un numar din stiva si se afiseaza \n'
-        statement += 'Gasiti o succesiune de mutari a.i. introducand el. 1 2 3 4 5 in stiva (in aceasta ordine) la final sa se afiseze 3 2 4 5 1.'
-        statement += '\n\n\n'
+        statement += 'Introduceti in stiva urmatoarele numere: '
+        
        
         data=[];
         n=randint(3, 99);  
         for i in range (1, n):
           data.append(randint(1, 99));
+        
+        statement += str(data) + '. Si folosind urmatorul pattern pt exemplul 12345 -> 32451, calculati si afisati numarul \n\n\n'
         super().__init__(statement, data)
        
     def solve(self):
@@ -36,7 +38,7 @@ class Problem3(Problem):
                k=randint(1,3);
           else:
                k=randint(int(n/2), n-3);
-               
+          solution +='Se va folosi raportul ' + str(k/n*100) + '% si ' + str((n-k)/n*100) + '% \n'     
           while i <= n:
                       if i <= k:
                             if ok == 0:
@@ -54,7 +56,7 @@ class Problem3(Problem):
                                     solution += 'Se va elimina din stiva numarul ' + str(self.data[contor-1]) + '\n'
                                     p(arr,stack);
                                     i = i + 1;
-                                    contor -= 1
+                                    contor = contor - 1;
                                        
                             if ok == 1 & contor == 1:
                                     contor = k + 1;
@@ -65,7 +67,7 @@ class Problem3(Problem):
                             e = self.data[contor];
                             numar(e,stack);
                             solution +='S-a introdus in stiva numarul ' + str(e) + '\n'
-                            solution += 'Se va elimina din stiva numarul ' + str(self.data[contor-1]) + '\n'
+                            solution += 'Se va elimina din stiva numarul ' + str(e) + '\n'
                             p(arr,stack);
                             contor = contor + 1;
                             i = i + 1;
