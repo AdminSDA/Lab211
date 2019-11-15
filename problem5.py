@@ -2,14 +2,15 @@ from problem import Problem
 from collections import defaultdict
 import random
 import string
-
+cnt = 10
 
 class Problem5(Problem):
     def __init__(self):
         statement = "Inserati urmatoarele valori, pe rand, intr-un arbore binar de cautare: "
         data = random.sample(range(1,9),7)
+        x=[data[0],data[1],data[2],data[3]]
         statement = statement + str(data) + ".\nScrieti nodurile care se pot sterge in doua moduri. Stergeti elementul "
-        k = random.choice(data)
+        k = random.choice(x)
         statement = statement + str(k) + "."
         data = [data, k]
 
@@ -20,6 +21,8 @@ class Problem5(Problem):
         solution="  "
         solution=solution+"\n"
         v=data[0] # in v retinem vectorul generat random
+        solution=solution + "Introducem elementele: " +str(v)+" intr-un arbore binar de cautare. \n"
+        solution=solution + "Radacina va fi: "+ str(v[0]) +"\n"
         nr=data[1] # in nr retinem valoarea nodului generata random care trebuie sters
         # cream structura nod: retinem fiul stang, pe cel drept si valoarea sa:
         class Nod:
@@ -72,12 +75,16 @@ class Problem5(Problem):
         for i in range(1, len(v)):
             inserare(A, Nod(v[i]))
 
-        print("\n")
-
+        solution = solution + "\n"
+        solution = solution + "Vectorul de tati este: "
+        solution = solution + str(t) + "\n"
+        solution = solution + "Vectorul de nivel este: "
+        solution = solution + str(v_niv) + "\n"
         solution = solution + "\n"
         solution = solution + "Verificam in vectorul de tati ce noduri pot fi sterse in 2 moduri (cele care au 2 fii).\n"
         solution = solution + "Nodurile care se pot sterge in doua moduri sunt: "
         solution = solution + "\n"
+
         # verificam in vectorul de tati ce noduri pot fi sterse in 2 moduri (cele care au 2 fii)
         for i in range(1,9):
             k = 0 # in k numaram de cate ori apare nodul i in vectorul de tati
@@ -88,12 +95,6 @@ class Problem5(Problem):
             if k > 1: # daca k apare de minim 2 ori, retine i in statement pt. a fi afisat
                 solution=solution + str(i) + " " + "deoarece are "+str(k) + " fii\n"
 
-        solution = solution + "\n"
-        solution=solution+"Vectorul de tati este:"
-        solution = solution + str(t) +"\n"
-        solution=solution+"Vectorul de nivel este:"
-        solution = solution + str(v_niv)
-
         # stabilim cea mai mica valoare din arbore:
         def val_min(nod):
             crt = nod # crt=valoarea nodului
@@ -101,6 +102,25 @@ class Problem5(Problem):
             while (crt.fiu_stang is not None):
                 crt = crt.fiu_stang
             return crt
+
+        # afisare nod:
+        def afisare_imbunatatita(rad, space, sol=""):
+            # primul caz
+            if (rad == None):
+                return ''
+            space += cnt # creste distanta dintre nivele
+            sol += afisare_imbunatatita(rad.fiu_drept, space) # parcurge intai fiii din dreapta
+            # afisam nodul curent dupa spatiu:
+            sol += '\n' # trecem la linie noua
+            sol += ' ' * (space - cnt) # afisam suficiente spatii
+            sol += str(rad.val) # afisam valoarea nodului curent
+            sol += afisare_imbunatatita(rad.fiu_stang, space) # parcurge fiii din stanga
+            return sol
+
+        # functie care returneaza sol-ul creat in functia anterioara
+        def print_imbunatatit(rad):
+            s = afisare_imbunatatita(rad, 0) # punem in string ce returneaza
+            return s
 
         # stergere nod:
         def stergere(rad, sters):
@@ -132,24 +152,29 @@ class Problem5(Problem):
                 rad.fiu_drept = stergere(rad.fiu_drept, x.val) # se repeta algoritmul de stergere pentru succesor
             return rad # returneaza noua radacina
 
-        solution = solution + "\n"
-        solution=solution + "Arborele initial este:\n\n"
-        
-        # functie care returneaza in solution:
+        # functie care afiseaza in solution:
         def afisare(rad,nivel):
-            sol=str(rad.val)+"   " # introduce valoarea radacinii curente in sol 
+            sol=str(rad.val)+"   "
             if rad.fiu_drept is None:
-                sol=sol+"\n   " # daca nu are fiu in dreapta, trece la linia urmatoare
+                sol=sol+"\n   "
             else:
-                sol=sol+afisare(rad.fiu_drept,nivel+1) # altfel,apeleaza functia pentru fiul din dreapta al radacinii curente si pune rezultatul in sol
-            if rad.fiu_stang is not None: # daca nu are fiu in stanga
+                sol=sol+afisare(rad.fiu_drept,nivel+1)
+            if rad.fiu_stang is not None:
                 for i in range(1,nivel+2):
-                    sol=sol+"   " # creste numarul de spatii
-                sol=sol+afisare(rad.fiu_stang,nivel+1) # apeleaza functia pentru fiul din stanga si pune rezultatul in sol
+                    sol=sol+"   "
+                sol=sol+afisare(rad.fiu_stang,nivel+1)
             return sol
 
+        """
+        solution = solution + "\n"
+        solution = solution + "Arborele initial este:\n\n"
         solution=solution+str(afisare(A,0))+"\n\n"
-        
+        """
+
+        solution = solution + "\n"
+        solution = solution + "Arborele initial este:\n\n"
+        solution = solution + str(print_imbunatatit(A)) + "\n\n"
+
         # functie pentru afisare din consola:
         def afisare_arbore(rad,space):
             if rad is None: # daca am terminat de parcurs arborele, iese
@@ -159,6 +184,7 @@ class Problem5(Problem):
             print(space+str(rad.val)) # afiseaza in consola
             afisare_arbore(rad.fiu_stang, space) # apeleaza functia pentru fiul stang
 
+        """
         print("Rezolvare in consola:")
         print("Arborele initial este (inordine):")
         inordine(A)
@@ -166,12 +192,23 @@ class Problem5(Problem):
         print("Arborele initial este:")
         afisare_arbore(A, " ")
         print()
+        """
+
         A=stergere(A,nr) # stergem nodul nr din arborele a carui radacina este A
+
+        """
         solution = solution + "Arborele final este:\n\n"
         solution = solution + str(afisare(A, 0))
+        """
+
+        solution = solution + "Arborele final, dupa stergerea elementului "+str(nr)+" este:\n\n"
+        solution = solution + str(print_imbunatatit(A)) + "\n\n"
+
+        """
         print("Arborele final este (inordine):")
         inordine(A)
         print()
         print("Arborele final este:")
         afisare_arbore(A, " ")
+        """
         return solution
