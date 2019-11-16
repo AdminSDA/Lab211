@@ -1,7 +1,7 @@
 #Echipa 1, Grupa 211, Problema 8
 import random 
 from random import sample
-from problem_constructor import Problem
+from problem import Problem
 
 class Problem8(Problem):
     def __init__(self):
