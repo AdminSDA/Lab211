@@ -24,7 +24,7 @@ class Problem3(Problem):
         statement += 'si determinati operatiile pentru care se afiseaza: '
         temp = data
         i=1
-        n=len(data)
+        n = len(data) - 1;
         if n <= 3:
                k=randint(1,3)
           else:
@@ -43,14 +43,13 @@ class Problem3(Problem):
         super().__init__(statement, data)
        
     def solve(self):
-          solution = 'Vom parcurge vectorul\n'
-          n = len(self.data) - 1
+          n = self.n
           stack = []
           arr = []
-          i=ok=0
+          i = ok = 0
           contor = 1
-          k=self.k
-          solution +='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
+          k = self.k
+          solution ='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
           solution +='Operatiile folosite sunt: \n'
           while i <= n:
                       if i <= k:
@@ -79,11 +78,9 @@ class Problem3(Problem):
                                 break
                             e = self.data[contor]
                             numar(e,stack)
-                            solution += 'numar('+str(e)+')\n'
-                            solution += 'p()\n'
-                           
+                            solution += 'numar('+str(e)+')\n' + 'p()\n'
                             p(arr,stack)
-                            contor = contor + 1;
+                            contor = contor + 1
                             i = i + 1
                                
           solution += 'p()\n'   
