@@ -84,7 +84,7 @@ class Problem3(Problem):
                                 break
                             e = data[contor]
                             numar(e,stack)
-                            solution += 'numar('+str(e)+') ' + 'p, '
+                            solution += 'numar('+str(e)+'), ' + 'p, '
                             p_type(arr,stack)
                             contor = contor + 1
                             i = i + 1
