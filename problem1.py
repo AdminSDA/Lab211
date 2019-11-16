@@ -30,9 +30,9 @@ class Problem1(Problem):
 
     def solve(self):
         solution = '\n    Creeam cele trei structuri de date in ordine: stiva coada stiva.\n'
-        solution += 'Stiva1:  |__________|\n'
-        solution += 'Coada:  |__________|\n'
-        solution += 'Stiva2:  |__________|\n\n'
+        solution += 'Stiva1:|__________|\n'
+        solution += 'Coada:|__________|\n'
+        solution += 'Stiva2:|__________|\n\n'
 
         stiva1 = []
         coada  = deque([])
