@@ -45,28 +45,28 @@ class Problem1(Problem):
         for i in range(0,len(self.data[2])):
             stiva1.append(self.data[2][i])
             aux = stiva1.pop()
-            aux1 = '\u0336'  + aux
+            aux1 = '\u0338'  + aux
             stiva1.append(aux1)
             coada.append(aux)
-            coada[i] = '\u0336' + aux
+            coada[i] = '\u0338' + aux
             stiva2.append(aux)
 
 
         for i in range (0,len(self.data[1])):
             stiva1.append(self.data[1][i])
             aux = stiva1.pop()
-            aux1 = '\u0336'  + aux
+            aux1 = '\u0338'  + aux
             stiva1.append(aux1)
             coada.append(aux)
 
 
         solution += '   Efectuam sirul de operatii: \n'
         for i in range(0, len(self.data[0])):
-            solution += self.data[0][i] + '  \u0332' + 'c  '
+            solution += self.data[0][i] + ' \u0332' + 'c '
         for i in range(0, len(self.data[2])):
-            solution +=self.data[2][i]  + '  \u0332' + 'c  ' + '  \u0332' + '1  ' + '  \u0332' + '2  '
+            solution +=self.data[2][i]  + ' \u0332' + 'c ' + ' \u0332' + '1 ' + ' \u0332' + '2 '
         for i in range(0, len(self.data[1])):
-            solution += self.data[1][i] + '  \u0332' + 'c  '  + '  \u0332' + '1  '
+            solution += self.data[1][i] + ' \u0332' + 'c '  + ' \u0332' + '1 '
         solution += '\n\n'
 
         solution += '   Obtinem: \n'
