@@ -1,6 +1,16 @@
-from problem import Problem
 from random import randint
- 
+
+class Problem:
+    def __init__(self, statement, data):
+        self.statement = statement
+        self.data = data
+
+    def solve(self):
+        raise NotImplementedError
+
+    def __str__(self):
+        return self.statement
+     
 def numar(x,stack):
      stack.append(x) #O(n)
  
