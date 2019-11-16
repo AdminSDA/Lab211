@@ -16,7 +16,7 @@ class Problem3(Problem):
         statement += 'Introduceti in stiva urmatoarele numere: ' 
         data=[]
         self.temp2=[]
-        self.n=randint(3, 99)  
+        self.n=randint(3, 20)  
         n=self.n
         for i in range (1, n):
           ktemp = randint(1, 99)
