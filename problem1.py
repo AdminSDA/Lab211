@@ -62,19 +62,19 @@ class Problem1(Problem):
 
         solution += '   Efectuam sirul de operatii: \n'
         for i in range(0, len(self.data[0])):
-            solution += self.data[0][i] + ' \u0332' + 'c '
+            solution += self.data[0][i] + '  \u0332' + 'c  '
         for i in range(0, len(self.data[2])):
-            solution +=self.data[2][i]  + ' \u0332' + 'c ' + ' \u0332' + '1 ' + ' \u0332' + '2 '
+            solution +=self.data[2][i]  + '  \u0332' + 'c  ' + '  \u0332' + '1  ' + '  \u0332' + '2  '
         for i in range(0, len(self.data[1])):
-            solution += self.data[1][i] + ' \u0332' + 'c '  + ' \u0332' + '1 '
+            solution += self.data[1][i] + '  \u0332' + 'c  '  + '  \u0332' + '1  '
         solution += '\n\n'
 
         solution += '   Obtinem: \n'
 
-        solution += 'Stiva1: ' + " ".join(map(str, stiva1))
+        solution += 'Stiva1: ' + "    ".join(map(str, stiva1))
         solution +='\n'
-        solution += 'Coada:  ' + " ".join(map(str, coada))
+        solution += 'Coada:  ' + "    ".join(map(str, coada))
         solution +='\n'
-        solution += 'Stiva2: ' + " ".join(map(str, stiva2))
+        solution += 'Stiva2: ' + "    ".join(map(str, stiva2))
         solution +="\n"
         return solution
