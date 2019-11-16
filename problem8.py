@@ -1,5 +1,5 @@
 #Echipa 1, Grupa 211, Problema 8
-#Buican Laura Andreea, Pintilie Sabina, Silaghi Tudor Adrian 
+#Buican Laura Andreea, Pintilie Sabina Maria, Silaghi Tudor Adrian 
 import random 
 from random import sample
 from problem import Problem
@@ -188,7 +188,3 @@ class Problem8(Problem):
         solve_c = self.solve_c()
         solve_d = self.solve_d()
         return solve_a + solve_b + solve_c + solve_d
-
-
-test_probl = Problem8()
-[print(x) for x in test_probl.solve()]
