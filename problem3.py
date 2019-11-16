@@ -1,15 +1,5 @@
 from random import randint
-
-class Problem:
-    def __init__(self, statement, data):
-        self.statement = statement
-        self.data = data
-
-    def solve(self):
-        raise NotImplementedError
-
-    def __str__(self):
-        return self.statement
+from problem import Problem
      
 def numar(x,stack):
      stack.append(x) #O(n)
@@ -37,7 +27,7 @@ class Problem3(Problem):
         n = len(data) - 1;
         if n <= 3:
                k=randint(1,3)
-          else:
+        else:
                k=randint(int(n/3), n-3)
         contor = k
         vec=[]
