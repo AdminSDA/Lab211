@@ -6,7 +6,7 @@ import string
 
 class Problem2 (Problem):
     def __init__(self):
-        lista_nr = list(range(3,5))
+        lista_nr = list(range(3,15))
 
         nr_caractere = random.choice(lista_nr)
         def rand_string(lenght):
@@ -113,8 +113,9 @@ class Problem2 (Problem):
                     solution += 'Eliminam elementul ' + s2[aux - 1] + " " ' din coada q2 si il adaugam in coada q1 prin operatia: 2\n'
                     b.append('2')
                     aux = cod2[0]
-                    cod1.append(s2[aux - 1])
                     cod2.remove(aux)
+                    cod1.append(s2[aux - 1])
+                    
 
                     solution += 'cod1' + str(cod1)
                     solution += '\n'
