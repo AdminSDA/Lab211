@@ -1,16 +1,13 @@
 from problem import Problem
 import random
 from random import sample
-#solution=""
+solution=''
 class Problem10(Problem):
     def __init__(self):
-        n=random.randint(4, 10)
+        n=random.randint(6, 10)
         data = sample(range(1, 101), n)
         self.k1=random.randrange(1,4)
-        if n<=4:
-            self.k2=random.randrange(0, n-2)
-        else:
-            self.k2=random.randrange(0, 3)
+        self.k2=random.randrange(1, 3)
         self.k3=random.randrange(1, 4)
         statement = '10. Se da vectorul: ' + ', '.join(map(str, data)) + '. '
         statement += 'Gasiti numarul minim de elemente care pot fi sterse astfel incat sa se poata considera ca s-au facut \n'
@@ -99,38 +96,37 @@ class Problem10(Problem):
         gata1 = gata2 = gata3 = 0
         x = sortMAX(vtest, k1)
         ok1 = 0
-        solution+='\nVerific daca vectorul satisface deja '+str(k1)+' pasi de sortare prin selectia maximului.\n'
+        solution+='\nGeneram toate combinarile posibile cu elementele vectorului,pana cand am rezolvat toate cerintele. Pentru fiecare combinare generata sterg din vector respectivele elemente si verific daca satisface vreuna din cerinte.\n '
+        #solution+='\nVerific daca vectorul satisface deja '+str(k1)+' pasi de sortare prin selectia maximului.\n'
         if x == 1:
-            #p = "SATISFACE {} PASI SORT MAX"
-            solution+='DA\n---Deci numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a '+ str(k1)+' pasi de sortare prin selectia maximului este '+str(min1)
-            solution+='\n   Vectorul rezultat dupa stergeri este '+str(vtest)+'\n'
+
+            solution+='\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a '+ str(k1)+' pasi de sortare prin selectia maximului este '+str(min1)
+            solution+='\n   Vectorul rezultat dupa stergeri este '+str(vtest)
+            solution += '\n   CONDITIA INDEPLINITA: pe ultimele ' + str(k1) + ' pozitii se afla cele mai mari elemente din vector, sortate crescator'
             ok1 = 1
             gata1 = 1
-        else:
-            solution+='NU\n'
+
         y = INSERTIONsort(vtest, k2)
         ok2 = 0
-        solution += '\nVerific daca vectorul satisface deja ' + str(k2) + ' pasi de sortare prin insertie directa.\n'
+        #solution += '\nVerific daca vectorul satisface deja ' + str(k2) + ' pasi de sortare prin insertie directa.\n'
         if y == 1:
-            solution += 'DA\n---Deci numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k2) + ' pasi de sortare prin insertie directa este ' + str(min2)
-            solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest)+'\n'
+            solution += '\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k2) + ' pasi de sortare prin insertie directa este ' + str(min2)
+            solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest)
+            solution += '\n   CONDITIA INDEPLINITA: primele ' + str(k2 + 1) + ' elemente din vector sunt sortate crescator'
             gata2 = 1
             ok2 = 1
-        else:
-            solution+='NU\n'
         z= sortMIN(vtest, k3)
         ok3 = 0
-        solution += '\nVerific daca vectorul satisface deja ' + str(k3) + ' pasi de sortare prin selectia minimului.\n'
+        #solution += '\nVerific daca vectorul satisface deja ' + str(k3) + ' pasi de sortare prin selectia minimului.\n'
         if z == 1:
-            solution += 'DA\n---Deci numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k3) + ' pasi de sortare prin selectia minimului este ' + str(min3)
-            solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest) + '\n'
+            solution += '\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k3) + ' pasi de sortare prin selectia minimului este ' + str(min3)
+            solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest)
+            solution += '\n   CONDITIA INDEPLINITA: pe primele ' + str(k3) + ' pozitii se afla cele mai mici elemente din vector, sortate crescator'
             gata3 = 1
             ok3 = 1
-        else:
-            solution+='NU\n'
+
         if gata1==1 and gata2==1 and gata3==1:
             return solution
-        solution+='\nGeneram toate combinarile posibile cu elementele vectorului,pana cand am rezolvat toate cerintele. Pentru fiecare combinare generata sterg din vector respectivele elemente si verific daca satisface vreuna din cerinte.\n '
         while gata1==0 or gata2==0 or gata3==0:
            for k in range(1,len(vtest)+1):
                 for j in comb(vtest,[],0,k):  # fiecare j reprezinta o comb
@@ -151,35 +147,37 @@ class Problem10(Problem):
                         z= sortMIN(cop, k3)
                     if x == 1 and gata1 == 0 and ok1 == 0 and len(cop) >= k1:
                         solution+='\n---Pentru a satisface '+str(k1)+' pasi de sortare prin selectia maximului, '
-                        solution+="numarul minim de elemente care trebuiesc sterse este "+str(min1)
+                        solution+="numarul minim de elemente care trebuiesc sterse este "+str(min1)+' ('+str(set(q))+')'
                         solution+='.\n   Vectorul rezultat dupa stergeri este '+str(cop)
-                        solution+='\n   (Am sters elementele '+str(set(q))+')'
+                        solution+='\n   CONDITIA INDEPLINITA: pe ultimele '+str(k1)+' pozitii se afla cele mai mari elemente din vector, sortate crescator'
                         gata1 = 1
                         ok1 = 1
                     if len(cop) < k1 and ok1 == 0:
-                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k1)+' PASI DE SORTARE PRIN SELECTIA MAXIMULUI\n'
+                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k1)+' PASI DE SORTARE PRIN SELECTIA MAXIMULUI DEOARECE NU EXISTA '+str(k1)+" ELEMENTE SORTATE DESCRESCATOR IN VECTORUL INITIAL \n"
                         ok1 = 1
                         gata1=1
                     if y == 1 and gata2 == 0 and ok2 == 0 and len(cop) >= k2 + 1:
                         solution += '\n---Pentru a satisface ' + str(k2) + ' pasi de sortare prin insertie directa, '
-                        solution += "numarul minim de elemente care trebuiesc sterse este " + str(min2)
+                        solution += "numarul minim de elemente care trebuiesc sterse este " + str(min2)+' (' + str(set(q)) + ')'
                         solution += '.\n   Vectorul rezultat dupa stergeri este ' + str(cop)
-                        solution += '\n   (Am sters elementele ' + str(set(q)) + ')'
+                        solution+='\n   CONDITIA INDEPLINITA: primele '+str(k2+1)+' elemente din vector sunt sortate crescator'
+
                         gata2 = 1
                         ok2 = 1
                     if len(cop) < k2 + 1 and ok2 == 0:
-                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k2)+' PASI DE SORTARE PRIN INSERTIE DIRECTA\n'
+                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k2)+' PASI DE SORTARE PRIN INSERTIE DIRECTA DEOARECE NU EXISTA '+str(k2+1)+" ELEMENTE SORTATE CRESCATOR IN VECTORUL INITIAL \n"
                         ok2 = 1
                         gata2=1
                     if z == 1 and gata3 == 0 and ok3 == 0 and len(cop) >= k3:
                         solution += '\n---Pentru a satisface ' + str(k3) + ' pasi de sortare prin selectia minumului, '
-                        solution += "numarul minim de elemente care trebuiesc sterse este " + str(min3)
+                        solution += "numarul minim de elemente care trebuiesc sterse este " + str(min3)+' (' + str(set(q)) + ')'
                         solution += '.\n   Vectorul rezultat dupa stergeri este ' + str(cop)
-                        solution += '\n   (Am sters elementele ' + str(set(q)) + ')'
+                        solution+='\n   CONDITIA INDEPLINITA: pe primele '+str(k3)+' pozitii se afla cele mai mici elemente din vector, sortate crescator'
+
                         gata3 = 1
                         ok3 = 1
                     if len(cop) < k3 and ok3 == 0:
-                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k3)+" PASI DE SORTARE PRIN SELECTIA MINIMULUI\n"
+                        solution+="\n---NU SE POT STERGE ELEMENTE ASTFEL INCAT VECTORUL SA FIE REZULTATUL A "+str(k3)+" PASI DE SORTARE PRIN SELECTIA MINIMULUI DEOARECE NU EXISTA "+str(k3)+" ELEMENTE SORTATE CRESCATOR IN VECTORUL INITIAL .\n"
                         ok3 = 1
                         gata3=1
         return solution
