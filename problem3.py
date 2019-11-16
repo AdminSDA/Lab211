@@ -1,14 +1,13 @@
 from random import randint
 from problem import Problem
      
-def numar(x,stack):
-     stack.append(x) #O(n)
+def numar(x, stack):
+     stack.append(x) 
  
-def p(arr,stack):
-     arr.append(stack.pop()) #O(n)
-     
-
-def p1(stack,x,vec):
+def p(arr, stack):
+     arr.append(stack.pop()) 
+    
+def p1(stack, x, vec):
      vec.append(stack.pop(x))
  
 class Problem3(Problem):
@@ -18,7 +17,7 @@ class Problem3(Problem):
         statement += 'P -> se extrage un numar din stiva si se afiseaza \n'
         statement += 'Introduceti in stiva urmatoarele numere: ' 
         data=[]
-        n=randint(3, 99)  
+        n = randint(3, 99)  
         for i in range (1, n):
           data.append(randint(1, 99))
         statement += 'si determinati operatiile pentru care se afiseaza: '
@@ -43,9 +42,9 @@ class Problem3(Problem):
         super().__init__(statement, data)
        
     def solve(self):
-          n = self.n
           stack = []
           arr = []
+          n = len(self.data) - 1
           i = ok = 0
           contor = 1
           k = self.k
