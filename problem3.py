@@ -23,12 +23,12 @@ class Problem3(Problem):
           data.append(randint(1, 99))
         statement += 'si determinati operatiile pentru care se afiseaza: '
         temp = data
-        i=1
-        n = len(data) - 1;
+        i = 1
+        n = n - 1
         if n <= 3:
-               k=randint(1,3)
+               k = randint(1,3)
         else:
-               k=randint(int(n/3), n-3)
+               k = randint(int(n/3), n-3)
         contor = k
         vec=[]
         while i < n:
