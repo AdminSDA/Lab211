@@ -5,12 +5,33 @@ class Problem9(Problem):
 
     lungime_maxima = 10
     valoare_maxima = 100
-    lungime = random.randint(4, lungime_maxima)
+    lungime = random.randint(5, lungime_maxima)
     v = random.sample(range(valoare_maxima), lungime)
-    pasi_ss = random.randint(1, lungime - 1)
-    pasi_is = random.randint(1, lungime - 1)
-    pivot1 = random.sample(v, 1)
-    pivot = pivot1[0]
+    # variabila banut controleaza probabilitatea ca raspunsul sa fie adevarat sau fals !
+    banut = random.randint(0, 9)
+
+    if banut > 1: # Avem 80% sansa sa aplicam 2 pasi din selection sort la vector
+        # se aplica 2 pasi din Selection Sort (maxim)
+        for i in range(lungime - 1, lungime - 3, -1):
+            index = i
+            for j in range(0, i):
+                if v[j] > v[index]:
+                    index = j
+
+            q = v[i]
+            v[i] = v[index]
+            v[index] = q
+
+    if lungime > 5:
+        pasi_ss = random.randint(1, 4)
+        pasi_is = random.randint(1, 4)
+        pivot1 = random.sample(v[(lungime - 4):(lungime - 1)], 1)
+        pivot = pivot1[0]
+    else:
+        pasi_ss = random.randint(1, lungime - 1)
+        pasi_is = random.randint(1, lungime - 1)
+        pivot1 = random.sample(v, 1)
+        pivot = pivot1[0]
 
     def __init__(self, problem9_v, problem9_lungime, problem9_pasi_ss, problem9_pasi_is, problem9_pivot):
         self.v = problem9_v
@@ -33,24 +54,17 @@ class Problem9(Problem):
         # n = len(arr) se poate folosi in loc sa primeasca lungimea din apelare
 
         solution += 'Sirul este: ' + ', '.join(map(str, v)) + '\n'
-        solution += '\n' # new line
 
         for i in range(1, n):
             inversari = False  # am folosit bool pentru inversari
             for j in range(0, n - i):
                 if v[j] > v[j + 1]:
-                    solution += '(' + str(v[j]) + ' > ' + str(v[j + 1]) + ' interschimbam ' + str(v[j]) + ' cu ' + str(v[j] + 1) + ' !) '
                     x = v[j]
                     v[j] = v[j + 1]
                     v[j + 1] = x
                     inversari = True
-                elif v[j] == v[j + 1]:
-                    solution += '(' + str(v[j]) + ' = ' + str(v[j] + 1) + ' nu interschimbam !) '
-                else:
-                    solution += '(' + str(v[j]) + ' < ' + str(v[j] + 1) + ' nu interschimbam !) '
 
-            solution += '\n' # new line
-            solution += 'Sirul este: ' + ', '.join(map(str, v)) + '\n'
+            solution += 'Dupa parcurgere sirul este: ' + ', '.join(map(str, v)) + '\n'
 
             if inversari == False:
                 solution += 'La aceasta parcurgere nu se face nici o inversare !\n'
@@ -65,33 +79,30 @@ class Problem9(Problem):
             index = i
 
             solution += 'Sirul este: ' + ', '.join(map(str, v)) + '\n'
-            solution += 'Suntem pe pozitia ' + str(index) + ' (numaram de la 0), adica la elementul ' + str(v[index]) + '\n'
-            solution += 'Parcurgem sirul pentru a determina cel mai mare element nesortat !\n'
+            solution += 'Parcurgem sirul pana la elementul ' + str(v[index]) + ' '
 
             for j in range(0, i):
-                solution += '(' + str(v[j]) + ' > ' + str(v[j])
 
                 if v[j] > v[index]:
                     index = j
-                    solution += ' Da) '
 
-                else:
-                    solution += ' Nu) '
+            if v[i] != v[index]:
+                solution += 'si interschimbam ' + str(v[i]) + ' cu ' + str(v[index]) + ' .\n'
 
-            solution += '\n' # new line
-            solution += 'Interschimbam elementele de pe pozitiile ' + str(i) + ' si ' + str(index) + ', '
-            solution += ' adica pe ' + str(i) + ' si pe ' + str(index) + ' !\n'
+                x = v[i]
+                v[i] = v[index]
+                v[index] = x
 
-            x = v[i]
-            v[i] = v[index]
-            v[index] = x
+            else:
+                solution += 'si nu se face nicio interschimbare . \n'
 
         solution += 'Sirul este sortat !\n'
         return solution
+
     def partitionare(self, v, n, pivot, solution):
         ok = False
         solution += 'Verificati daca vectorul a rezultat in urma unei partitionari folosind pivotul ' + str(pivot) + ' !\n'
-        solution += 'Aflam pozitia pe care se afla pivotul: \n'
+        solution += 'Aflam pozitia pe care se afla pivotul: '
 
         for i in range(0, n):
             if v[i] == pivot:
@@ -99,39 +110,23 @@ class Problem9(Problem):
                 ok = True
 
         if ok == False:
-            solution += 'Elementul ales ca pivot nu se gaseste in vector \n'
+            solution += '\nElementul ales ca pivot nu se gaseste in vector !\n'
             return solution
 
         solution += str(poz) + '\n'
-        solution += 'Verificam daca elementele din stanga pivotului sunt mai mici decat pivotul \n'
-
-        if poz == 0:
-            solution += 'Pivotul este chiar primul element din vector, deci nu mai are vecini stanga sa.\n'
+        solution += 'Verificam daca elementele din stanga sunt mai mici decat pivotul, iar cele din dreapta, mai mari. \n'
 
         if poz != 0:
             for i in range(0, poz):
                 if v[i] > pivot:
-                    solution += '(' + str(v[i]) + ' < ' + str(pivot) + ') nu verifica => \n'
                     solution += 'Vectorul nu a rezultat in urma unei partitionari folosind pivotul ' + str(pivot) + '\n'
                     return solution
-                else:
-                    solution += '(' + str(v[i]) + ' < ' + str(pivot) + ' verifica) '
-            solution += '\n' # new line
-
-        solution += 'Verificam daca elementele din dreapta pivotului sunt mai mari decat pivotul \n'
-
-        if poz == n - 1:
-            solution += 'Pivotul este chiar ultimul element din vector, deci nu mai are vecini la dreapta sa.\n'
 
         if poz != n - 1:
             for i in range(poz + 1, n):
                 if v[i] < pivot:
-                    solution += '(' + str(v[i]) + ' > ' + str(pivot) + ') nu verifica => \n'
                     solution += 'Vectorul nu a rezultat in urma unei partitionari folosind pivotul ' + str(pivot) + '\n'
                     return solution
-                else:
-                    solution += '(' + str(v[i]) + ' > ' + str(pivot) + ' verifica) '
-            solution += '\n' # new line
 
         solution += 'Da, vectorul a rezultat in urma unei partitionari folosind pivotul ' + str(pivot) + '\n'
         return solution
