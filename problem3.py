@@ -56,13 +56,13 @@ class Problem3(Problem):
           contor = 1
           k = self.k
           solution ='Operatiile folosite sunt: \n'
-          solution += '[ '
+          solution += '['
           while i <= n:
                       if i <= k:
                             if ok == 0:
                                    e = data[i]
                                    numar(e,stack)
-                                   solution += 'numar(' + str(e) + ') '
+                                   solution += 'numar(' + str(e) + '), '
                                    if i == k:
                                               ok = 1
                                               i = 1
@@ -71,7 +71,7 @@ class Problem3(Problem):
                                         contor = contor + 1
                                        
                             elif contor-i != 0:
-                                    solution += 'p() '
+                                    solution += 'p, '
                                     p_type(arr,stack)
                                     i = i + 1
                                     contor = contor - 1
@@ -84,11 +84,11 @@ class Problem3(Problem):
                                 break
                             e = data[contor]
                             numar(e,stack)
-                            solution += 'numar('+str(e)+') ' + 'p() '
+                            solution += 'numar('+str(e)+') ' + 'p, '
                             p_type(arr,stack)
                             contor = contor + 1
                             i = i + 1
                                
-          solution += 'p() ]'   
+          solution += 'p]'   
           p_type(arr,stack)
           return solution
