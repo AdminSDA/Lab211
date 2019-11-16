@@ -1,13 +1,14 @@
 from random import randint
 from problem import Problem
      
-def numar(x, stack):
-     stack.append(x) 
+def numar(x,stack):
+     stack.append(x) #O(n)
  
-def p(arr, stack):
-     arr.append(stack.pop()) 
-    
-def p1(stack, x, vec):
+def p_type(arr,stack):
+     arr.append(stack.pop()) #O(n)
+     
+
+def p1(stack,x,vec):
      vec.append(stack.pop(x))
  
 class Problem3(Problem):
@@ -17,45 +18,52 @@ class Problem3(Problem):
         statement += 'P -> se extrage un numar din stiva si se afiseaza \n'
         statement += 'Introduceti in stiva urmatoarele numere: ' 
         data=[]
-        n = randint(3, 99)  
+        self.temp2=[]
+        self.n=randint(3, 20)  
+        n=self.n
         for i in range (1, n):
-          data.append(randint(1, 99))
-        statement += 'si determinati operatiile pentru care se afiseaza: '
+          ktemp = randint(1, 99)
+          data.append(ktemp)
+          self.temp2.append(ktemp)
         temp = data
-        i = 1
-        n = n - 1
+        i=1
+        n = len(data);
         if n <= 3:
-               k = randint(1,3)
+               self.k=randint(1,3)
         else:
-               k = randint(int(n/3), n-3)
-        contor = k
+               self.k=randint(int(n/3), n-3)
+        contor = self.k
         vec=[]
         while i < n:
                   p1(temp,contor,vec)
-                  if i < k:
+                  if i < self.k:
                       contor = contor - 1
                   i = i + 1
         contor = contor - 1      
         p1(temp,contor,vec)
+        k = self.k
+        statement += str(self.temp2) + ' pentru care avem raportul: \n' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'    
+        statement += 'Determinati operatiile pentru care se afiseaza: '
         statement += str(vec)
         statement += "\n"
         super().__init__(statement, data)
        
     def solve(self):
+          data = self.temp2
+          n = self.n - 1
           stack = []
           arr = []
-          n = len(self.data) - 1
           i = ok = 0
           contor = 1
           k = self.k
-          solution ='Se va folosi raportul ' + str(int(k/n*100)) + '% si ' + str(int((n-k)/n*100)) + '% \n'
-          solution +='Operatiile folosite sunt: \n'
+          solution ='Operatiile folosite sunt: \n'
+          solution += '[ '
           while i <= n:
                       if i <= k:
                             if ok == 0:
-                                   e = self.data[i]
+                                   e = data[i]
                                    numar(e,stack)
-                                   solution += 'numar(' + str(e) + ')\n'
+                                   solution += 'numar(' + str(e) + ') '
                                    if i == k:
                                               ok = 1
                                               i = 1
@@ -64,8 +72,8 @@ class Problem3(Problem):
                                         contor = contor + 1
                                        
                             elif contor-i != 0:
-                                    solution += 'p()\n'
-                                    p(arr,stack)
+                                    solution += 'p() '
+                                    p_type(arr,stack)
                                     i = i + 1
                                     contor = contor - 1
                                        
@@ -75,13 +83,13 @@ class Problem3(Problem):
                       else:
                             if contor == n:
                                 break
-                            e = self.data[contor]
+                            e = data[contor]
                             numar(e,stack)
-                            solution += 'numar('+str(e)+')\n' + 'p()\n'
-                            p(arr,stack)
+                            solution += 'numar('+str(e)+') ' + 'p() '
+                            p_type(arr,stack)
                             contor = contor + 1
                             i = i + 1
                                
-          solution += 'p()\n'   
-          p(arr,stack)
+          solution += 'p() ]'   
+          p_type(arr,stack)
           return solution
