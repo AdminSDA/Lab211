@@ -1,3 +1,6 @@
+from random import randint
+from problem import Problem
+
 def numar(x,stack):
      stack.append(x) #O(n)
  
