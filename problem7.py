@@ -81,6 +81,8 @@ def afisare(root, nrNivele):
         nrNoduriNivel -= 1
         while (nrNoduriNivel > 0):
             x = coadaFinala.get()
+            if(coadaFinala.empty()):
+                return
             if (x == " "):
                 v.append(0)
             else:
@@ -130,7 +132,7 @@ def afisare(root, nrNivele):
                         else:
                             print(4*space + '/' + '\\', end='')
         else:
-            if(nivel == nivelMax):
+            if(nivel > nivelMax):
                 return
         print()
         nivel += 1
@@ -176,7 +178,7 @@ class Problem7 (Problem):
         super().__init__(statement, data)
 
     def solve(self):
-        solution = "Idee de rezolvare:Ne folosim de parcurgerea RSD (primul element e radacina) si il cautam in SRD, construind arborele. \n "
+        solution = "\nIdee de rezolvare:Ne folosim de parcurgerea RSD (primul element e radacina) si il cautam in SRD, construind arborele. \n "
         solution += "Rezolvare:Luam primul element din RSD si il cautam in SRD.Impartim SRD in doua parti si luam primul nod din RSD(dupa impartire)si il cautam in partea stanga a SRD \n "
         vector = self.data
         v3 = []
@@ -190,107 +192,120 @@ class Problem7 (Problem):
         nodArboreStang = root   #copie a radacinii
         nodArboreDrept = root
         radAnte = root.val
-        solution += "Prima radacina este: " + str(radAnte) + "\n"
-        solution += " Cautam " + str(radAnte) + " in SRD.\n "
+        solution += "Pas 1: Prima radacina este: " + str(radAnte) + "\n"
+        solution += " Cautam " + str(radAnte) + " in SRD si impartim SRD in doi subarbori. \n "
         for i in range(n):
             if(SRD[i]==RSD[0]):
                 pozRad = i
                 pozitie = i
                 break
+        SRDs = SRD[0:pozitie]
+        RSDs = RSD[1:len(SRDs)+1]
+        SRDd = SRD[pozitie: n]
+        RSDd = RSD[len(SRDs) + 1:n]
+        solution += "RSD: " + str(RSDs) + " SRD: " + str(SRDs) + "\n"
+        pas = 2
+        shouldPrint = 1
         for i in range(1, n):
             rad = RSD[i]
-            solution += "Noua radacina va fi: " + str(RSD[i]) +".\n "
+            solution += "Pas " + str(pas) + ": Noua radacina va fi: " + str(RSD[i]) + " "
+
             for j in range(pozitie):
                 if(SRD[j] == rad):
-                    solution += "Cautam noua radacina in SRD. \n "
-                    solution +=  str(rad)+ " se afla pe pozitia " + str(j) + " si verificam daca se afla in stanga sau in dreapta nodului anterior " + str(radAnte) + ".\n "
+                    #solution += "Cautam noua radacina in SRD. \n "
+                    #solution +=  str(rad)+ " se afla pe pozitia " + str(j) + " si verificam daca se afla in stanga sau in dreapta nodului anterior " + str(radAnte) + ".\n "
                     if (j<pozRad):
                         nodArboreStang.left = Nod(SRD[j])
                         SRD[j] = 0;
-                        solution +=  str(rad) + " se afla in stanga, deci il adaugam in stanga nodului anterior. \n "
+                        solution +=  ",care se afla in stanga nodului anterior in SRD, deci il adaugam in stanga. \n "
                         tata[nodArboreStang.left.val] = nodArboreStang
                         nodArboreStang = nodArboreStang.left
 
-                        solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
+                        #solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
                         if(j != 0):
                             if (SRD[j-1] == 0 and SRD[j + 1] == radAnte):
-                                solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n "
+                                #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n "
                                 nodArboreStang = tata[nodArboreStang.val]
                                 nrNiveleStanga -= 1
                             else:
-                                solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                                #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                                 pass
                         else:
                             if (SRD[j + 1] == 0):
-                                solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n "
+                                #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n "
                                 nodArboreStang = tata[nodArboreStang.val]
                                 nrNiveleStanga -= 1
                             else:
-                                solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                                #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                                 pass
                     else:
                         nodArboreStang.right = Nod(SRD[j])
                         SRD[j] = 0;
-                        solution += str(rad) + " se afla in dreapta, deci il adaugam in dreapta nodului anterior. \n "
+                        solution += ",care se afla in dreapta nodului anterior in SRD, deci il adaugam in dreapta. \n"
                         tata[nodArboreStang.right.val] = nodArboreStang
                         nodArboreStang = nodArboreStang.right
-                        solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
+                        #solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
                         if (SRD[j-1] == 0 and SRD[j + 1] == 0):
-                            solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) +".\n"
+                            #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) +".\n"
                             nodArboreStang = tata[nodArboreStang.val]
                             nrNiveleStanga -= 1
                         else:
-                            solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                            #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                             pass
                     radAnte = rad
                     nrNiveleStanga += 1
                     pozRad = j
                     break
+            if(i >= pozitie and shouldPrint == 1):
+                solution+= "\n Am terminat de parcurs arborele stang deci impartim in alti doi subarbori pentru partea dreapta. \n"
+                solution+= "RSD: " + str(RSDd) + " SRD: "  + str(SRDd) + "\n"
+                shouldPrint = 0
             for j in range(pozitie, n):
                 if(SRD[j] == rad):
-                    solution += "Cautam noua radacina in SRD.\n "
-                    solution +=  str(rad)+ " se afla pe pozitia " + str(j) + " si verificam daca se afla in stanga sau in dreapta nodului anterior " + str(radAnte) +".\n "
+                    #solution += "Cautam noua radacina in SRD.\n "
+                    #solution +=  str(rad)+ " se afla pe pozitia " + str(j) + " si verificam daca se afla in stanga sau in dreapta nodului anterior " + str(radAnte) +".\n "
                     if (j<pozRad):
                          nodArboreDrept.left = Nod(SRD[j])
                          SRD[j] = 0;
-                         solution +=   str(rad) + " se afla in stanga, deci il adaugam in stanga nodului anterior. \n "
+                         solution +=  ",care se afla in stanga nodului anterior in SRD, deci il adaugam in stanga. \n "
                          tata[nodArboreDrept.left.val] = nodArboreDrept
                          nodArboreDrept = nodArboreDrept.left
-                         solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
+                         #solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
                          if (SRD[j+1] == 0 and SRD[j - 1] == 0):
-                            solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
+                            #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
                             nodArboreDrept = tata[nodArboreDrept.val]
                             nrNiveleDreapta -= 1
                          else:
-                            solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                            #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                             pass
                     else:
                         nodArboreDrept.right = Nod(SRD[j])
                         SRD[j] = 0
-                        solution +=   str(rad) + " se afla in dreapta, deci il adaugam in dreapta nodului anterior. \n "
+                        solution +=  ",care se afla in dreapta nodului anterior in SRD, deci il adaugam in dreapta. \n "
                         tata[nodArboreDrept.right.val] = nodArboreDrept
                         nodArboreDrept = nodArboreDrept.right
-                        solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
+                        #solution += "Verificam daca nodul " + str(rad) + " mai are noduri in stanga sau in dreapta in SRD. \n "
                         if (j != n - 1):
                             if(SRD[j+1] == 0 and SRD[j - 1] == 0):
-                                solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
+                                #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
                                 nodArboreDrept = tata[nodArboreDrept.val]
                                 nrNiveleDreapta -= 1
                             else:
-                                solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                                #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                                 pass
                         else:
                             if (SRD[j - 1] == 0):
-                                solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
+                                #solution += "Nodul " + str(rad) + " nu mai are noduri in stanga sau in dreapta, deci ne intoarcem la nodul " + str(radAnte) + ".\n"
                                 nodArboreDrept = tata[nodArboreDrept.val]
                                 nrNiveleDreapta -= 1
                             else:
-                                solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
+                                #solution += "Nodul " + str(rad) + " mai are noduri in  stanga sau in dreapta, deci ramanem la acelasi nod. \n "
                                 pass
                     radAnte = rad
                     pozRad = j
                     nrNiveleDreapta += 1
                     break
+            pas+=1
         solution+= "Am terminat de parcurs RSD.\n"
         solution+= " Parcurgerea SDR pentru arborele dat este :"
         sd = sdr(root, v3)
