@@ -7,8 +7,8 @@ class Problem10(Problem):
         n=random.randint(6, 10)
         data = sample(range(1, 101), n)
         self.k1=random.randrange(1,4)
-        self.k2=random.randrange(1, 3)
-        self.k3=random.randrange(1, 4)
+        self.k2=random.randrange(1,3)
+        self.k3=random.randrange(1,4)
         statement = '10. Se da vectorul: ' + ', '.join(map(str, data)) + '. '
         statement += 'Gasiti numarul minim de elemente care pot fi sterse astfel incat sa se poata considera ca s-au facut \n'
         statement+= ' - ' + (str(self.k1))
