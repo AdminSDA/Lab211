@@ -45,17 +45,17 @@ class Problem1(Problem):
         for i in range(0,len(self.data[2])):
             stiva1.append(self.data[2][i])
             aux = stiva1.pop()
-            aux1 = '\u0336'  + aux
+            aux1 = '\u0336'.join(aux) + '\u0336'
             stiva1.append(aux1)
             coada.append(aux)
-            coada[i] = '\u0336' + aux
+            coada[i] = '\u0336'.join(aux) + '\u0336'
             stiva2.append(aux)
 
 
         for i in range (0,len(self.data[1])):
             stiva1.append(self.data[1][i])
             aux = stiva1.pop()
-            aux1 = '\u0336'  + aux
+            aux1 = '\u0336'.join(aux) + '\u0336'
             stiva1.append(aux1)
             coada.append(aux)
 
