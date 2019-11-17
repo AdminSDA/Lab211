@@ -97,7 +97,7 @@ class Problem10(Problem):
         x = sortMAX(vtest, k1)
         ok1 = 0
         solution+='\nGeneram toate combinarile posibile cu elementele vectorului,pana cand am rezolvat toate cerintele. Pentru fiecare combinare generata sterg din vector respectivele elemente si verific daca satisface vreuna din cerinte.\n '
-        #solution+='\nVerific daca vectorul satisface deja '+str(k1)+' pasi de sortare prin selectia maximului.\n'
+      
         if x == 1:
 
             solution+='\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a '+ str(k1)+' pasi de sortare prin selectia maximului este '+str(min1)
@@ -108,7 +108,7 @@ class Problem10(Problem):
 
         y = INSERTIONsort(vtest, k2)
         ok2 = 0
-        #solution += '\nVerific daca vectorul satisface deja ' + str(k2) + ' pasi de sortare prin insertie directa.\n'
+        
         if y == 1:
             solution += '\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k2) + ' pasi de sortare prin insertie directa este ' + str(min2)
             solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest)
@@ -117,7 +117,7 @@ class Problem10(Problem):
             ok2 = 1
         z= sortMIN(vtest, k3)
         ok3 = 0
-        #solution += '\nVerific daca vectorul satisface deja ' + str(k3) + ' pasi de sortare prin selectia minimului.\n'
+        
         if z == 1:
             solution += '\n---Numarul minim de elemente care trebuiesc sterse pt ca vectorul sa fie rezultatul a ' + str(k3) + ' pasi de sortare prin selectia minimului este ' + str(min3)
             solution += '\n   Vectorul rezultat dupa stergeri este ' + str(vtest)
