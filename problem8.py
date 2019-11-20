@@ -69,7 +69,7 @@ class Problem8(Problem):
             solution += str(sir)
 
     
-        return solution, sir
+        return solution
 #=================================================================B===============================================================================
     def solve_b(self):
         sir_b = self.data[0]
@@ -102,7 +102,7 @@ class Problem8(Problem):
             sir[i], sir[poz_min] = sir[poz_min], sir[i]
             solution += str(sir)
 
-        return solution, sir
+        return solution
 #======================================================================C=========================================================================
     # C 
     def partition(self,sir,low,high): 
@@ -145,7 +145,7 @@ class Problem8(Problem):
         self.solution1 += '\nFolosim partitionarea Hoare\n'
         
         cerinta = self.statement
-        return self.solution1, sir
+        return self.solution1
 
  #===========================================================D===================================================================================   
     def solve_d(self):
@@ -180,7 +180,7 @@ class Problem8(Problem):
             
             solution += str(sir) + '\n'
 
-        return solution, sir
+        return solution
     
     def solve(self):
         solve_a = self.solve_a()
