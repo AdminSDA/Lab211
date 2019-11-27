@@ -30,7 +30,7 @@ class Problem17(Problem):
             # incrementare i daca e mai mic
             if sir[i] < pivot:
                 i = i + 1
-            elif sir[j] >= pivot:
+            elif sir[j] > pivot:
                 j = j - 1
                 # self.solution1 += "\n" + str(sir) + "\n"
             else:
