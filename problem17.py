@@ -3,7 +3,6 @@ from random import sample
 from problem import Problem
 
 
-# de schimbat cu nr problemei corecte
 class Problem17(Problem):
     def __init__(self):
         statement = "Se da sirul "
