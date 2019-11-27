@@ -1,4 +1,5 @@
 from problem import Problem
+import random
 
 def find_zeros(array):
      i=0
@@ -141,5 +142,4 @@ class Problem29(Problem):
                 final.sort()
                 solution += 'Ordonare completa. Primele ' + str(self.k) + ' elemente sunt: \n'
                 solution += str(final);
-        return solution        
-    
+        return solution   
