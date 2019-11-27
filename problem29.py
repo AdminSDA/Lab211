@@ -1,4 +1,4 @@
-import Problem from problem
+from problem import Problem
 
 def find_zeros(array):
      i=0
