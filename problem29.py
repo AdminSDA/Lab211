@@ -45,12 +45,12 @@ def knumar(vector, stanga, dreapta, k):
                 contor1 = contor - stanga
                 if (contor1 == k - 1):  
                     return vector[contor]  
-                if (contor1 < k - 1):
-                    return knumar(vector, contor + 1, dreapta, k - contor1 - 1)  
-                   
-                return knumar(vector, stanga, contor - 1, k)  
+                if (contor1 > k - 1):
+                    return knumar(vector, stanga, contor - 1, k)  
  
-               
+                return knumar(vector, contor + 1, dreapta, k - contor1 - 1)  
+ 
+ 
  
 def swap(vector, a, b):  
     temp = vector[a]  
