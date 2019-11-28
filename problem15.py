@@ -1,5 +1,5 @@
 import random
-#from problem import Problem
+from problem import Problem
 
 _BTinfo = [1, 5, 4, -1, -1, -1, -1, 9, 8, 3, -1, 0, 0, 0, 0, -1, -1, -1, 2]
 _RSDcitit = [1, 5, 3, -1, -1, -1, 4, 9, -1, 2, -1, -1, 8, -1, -1]
