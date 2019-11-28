@@ -1,111 +1,122 @@
-import binarytree
-from binarytree import Node
-from binarytree import build
 from problem import Problem
 import random
 from random import sample
+#from arbore import Node
+#from arbore import Tree
 
+class Node():
 
-def insert(node, value):
-    if node.value:
-        if value < node.value:
-            if node.left is None:
-                node.left = Node(value)
-            else:
-                insert(node.left, value)
-        elif value > node.value:
-            if node.right is None:
-                node.right = Node(value)
-            else:
-                insert(node.right, value)
-    else:
-        node.value = value
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
 
-INT_MIN = -1000
-INT_MAX = 1000
+    def insert(self, data):
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+        else:
+            self.data = data
 
+    def postorder(self, root):
+        res = []
+        if root:
+            res = self.postorder(root.left)
+            res = res + self.postorder(root.right)
+            res.append(root.data)
+        return res
 
-def BST_fromSDR_recursiv(sdr, postIndex,
-                      key, min, max, size):
+    def inorder(self, root):
+        res = []
+        if root:
+            res = self.inorder(root.left)
+            res.append(root.data)
+            res = res + self.inorder(root.right)
+        return res
+class Tree():
 
-    if (postIndex[0] < 0):
-        return None
+    def __init__(self):
+        self.root = None
 
-    root = None
+    def insert(self,data):
+        if self.root:
+            return self.root.insert(data)
+        else:
+            self.root = Node(data)
+            return True
 
-    # If current element of post[] is
-    # in range, then only it is part
-    # of current subtree
-    if (key > min and key < max):
+    def inorder(self):
+        if self.root is not None:
+            return self.root.inorder(data)
+        else:
+            return False
 
-        # Allocate memory for root of this
-        # subtree and decrement *postIndex
-        root = Node(key)
-        postIndex[0] = postIndex[0] - 1
-
-        if (postIndex[0] >= 0):
-            # All nodes which are in range key..
-            # max will go in right subtree, and
-            # first such node will be root of
-            # right subtree.
-            root.right = BST_fromSDR_recursiv(sdr, postIndex,
-                                           sdr[postIndex[0]],
-                                           key, max, size)
-
-            # Contruct the subtree under root
-            # All nodes which are in range min ..
-            # key will go in left subtree, and
-            # first such node will be root of
-            # left subtree.
-            root.left = BST_fromSDR_recursiv(sdr, postIndex,
-                                          sdr[postIndex[0]],
-                                          min, key, size)
-
-    return root
-
-
-def BST_fromSDR(sdr, nr_noduri):
-    postIndex = [nr_noduri - 1]
-    return BST_fromSDR_recursiv(sdr, postIndex,
-                             sdr[postIndex[0]],
-                             INT_MIN, INT_MAX, nr_noduri)
-
-
-def postorder(node):
-    res = []
-    if node:
-        res = postorder(node.left)
-        res = res + postorder(node.right)
-        res.append(node.value)
-    return res
-
-class Problem13(Problem):
+class Problema13(Problem):
     def __init__(self):
         statement = ""
-        nr_noduri = 8
+        nr_noduri = 7
         v = sample(range(1, 20), nr_noduri)
-        i = random.randint(0, 7)
-        rad = v[i]
+        i = random.randint(1,7)
+        rad=v[i]
         root = Node(rad)
+        statement += "Radacina este " + str(rad) + "\n"
 
-        for i in range(nr_noduri):
-            insert(root, v[i])
+        for i in range(len(v)):
+            statement += "Inseram in ABC nodul " + str(v[i]) + "\n"
+            root.insert(v[i])
 
-        sdr = postorder(root)
+        sdr = root.postorder(root)
+        srd = root.inorder(root)
+
         statement += "Se da urmatoarea parcurgere in postordine (SDR) a unui arbore binar de cautare: " + str(sdr)
         statement += "\nReconstruiti arborele."
-        data = sdr
+
+        statement += "\nParcurgerea in inordine (SRD) a arborelui este: " + str(srd)
+        print(statement)
+        data = [srd, rad]
+
         super().__init__(statement, data)
 
     def solve(self):
+        srd = self.data[0]
+        rad = self.data[1]
         solution = ""
-        sdr = self.data
-        solution += "\n Parcurgerea in post-ordine este:" + str(sdr) + "\n"
+        
+        space = ' '
+        v1 = []
+        v2 = []
+        rad = self.data[1]
+        for i in range(7):
+            if(srd[i] < rad):
+                v1.append(srd[i])
+            if(srd[i] > rad):
+                v2.append(srd[i])
+        
+        solution += str(v1) + str(rad) + str(v2) + "\n"
+        solution += 10*space + "______" + str(rad) + "______" + "\n"
+        solution += 9*space + "/" + 14*space + "\\" + "\n"
+        solution += 5*space + "___" + str(v1[1]) + "___" + 10*space + "___" + str(v2[1]) + "___" + "\n"
 
-        nr_noduri = len(sdr)
-        bst_from_sdr = BST_fromSDR(sdr, nr_noduri)
-        solution+= "\n - Constructia arborelui binar de cautare pornind de la SDR -"
-        solution += "\n => Arborele binar de cautare reconstruit din parcurgerea post-ordine este: " + str(bst_from_sdr)
+        i = 0
 
+        while(i != len(v1)-1):
+            if(v1[i] < v1[i-1]):
+                solution += 4*space + "/" + 7*space + "\\" +"\n"
+                solution += 3*space + str(v1[i])
+                i = i + 1
+                if(v1[i] > v1[i-1]):
+                    solution += 8*space + str(v1[i])
+                    i = i +1
+            else: #(v1[i] > v1[i-1]):
+                i = i + 1
         return solution
+        
 
