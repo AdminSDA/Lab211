@@ -19,9 +19,11 @@ def search_arr(vector, x):
      return 'error';
      
                    
-def knumar(vector, stanga, dreapta, k):
+def knumar(vector, stanga, dreapta, k, solution, pas):
         lungimea = dreapta - stanga + 1;
         if k > 0 and k <= lungimea:
+                if pas == 1:
+                    solution += 'Pasul ' + str(stanga) + ' din ' + str(dreapta) + ': \n'
                 mediana_part_cinci = []
                 i = 0
                 while i < lungimea: #T(12/5*n) ~ O(n)
@@ -39,17 +41,18 @@ def knumar(vector, stanga, dreapta, k):
                     i += 5
          
                 i = i // 5
-                med = knumar(mediana_part_cinci, 0, i - 1, i // 2) #O(1)
+                med = knumar(mediana_part_cinci, 0, i - 1, i // 2, solution, 0) #O(1)
                 if i == 1:
                     med = mediana_part_cinci[0]  
                 contor = verificare(vector, stanga, dreapta, med) #returneaza si ordoneaza vectorul in ordinea k
+                solution += 'Numarul ' + med + ' este al ' + contor + ' lea numar cel mai mic numar din sir '
                 contor1 = contor - stanga
                 if (contor1 == k - 1):  
                     return vector[contor]  
                 if (contor1 > k - 1):
-                    return knumar(vector, stanga, contor - 1, k)  
+                    return knumar(vector, stanga, contor - 1, k, solution, 1)  
  
-                return knumar(vector, contor + 1, dreapta, k - contor1 - 1)  
+                return knumar(vector, contor + 1, dreapta, k - contor1 - 1, solution, 1)  
  
  
  
@@ -94,7 +97,7 @@ class Problem29(Problem):
         super().__init__(statement, data)
  
     def solve(self):
-        solution = 'Implementam primul vector intr-un vector temporar... \n'
+        solution = 'Implementam primele k numere in vectorul v1 \n'
         i = 0
         temp = []
         while i < self.k:
@@ -117,7 +120,7 @@ class Problem29(Problem):
              solution += str(final)
  
         else:
-                solution += 'Nu au aparut zerouri in v1 deci continuam \n'    
+                solution += 'Nu au aparut zerouri in v1 deci continuam... \n'    
                 i = self.k
                 j = i * 2
                 solution += 'Importam numere in vectorul v2: \n'
@@ -126,20 +129,20 @@ class Problem29(Problem):
                           break
                     temp.append(self.data[i])
                     i = i + 1
-                solution += 'Importare completa. Acum se va ordona vectorul in functie de al ' + str(self.k) + ' element \n'
-                e = knumar(temp, 0, len(temp) - 1, self.k)
+                e = knumar(temp, 0, len(temp) - 1, self.k, solution, 1)
                 if self.k == 1:
                     solution += 'Primul numar este: ' + str(e) + '\n'
                 else:
-                    solution += 'Numarul al ' + str(self.k) + ' lea cel mai mare element este: ' + str(e) + '\n'
-                solution += 'Se ordoneaza cele ' + str(self.k) + ' numere... \n'
+                    solution += 'Numarul al ' + str(self.k) + ' lea cel mai mic element este: ' + str(e) + '\n'
+                solution += 'Se cauta numere mai mici decat numarul: ' + str(self.k) + ' si se ordoneaza: \n'
                 final = []
                 i = 0
                 index = search_arr(temp, e)
                 while i <= index:
                      final.append(temp[i])
                      i = i + 1
-                final.sort()
                 solution += 'Ordonare completa. Primele ' + str(self.k) + ' elemente sunt: \n'
                 solution += str(final);
-        return solution   
+                solution += '\nNumerele sortate sunt: ' + str(final);
+                
+        return solution
