@@ -43,11 +43,11 @@ def knumar(vector, stanga, dreapta, k, solution, pas):
                 i = i // 5
                 med = knumar(mediana_part_cinci, 0, i - 1, i // 2, solution, 0) #O(1)
                 if i == 1:
-                    med = mediana_part_cinci[0]  
-                if pas == 1:    
-                     contor = verificare(vector, stanga, dreapta, med) #returneaza si ordoneaza vectorul in ordinea k
-                     solution += 'Numarul ' + str(med) + ' este al ' + str(contor) + ' lea numar cel mai mic numar din sir '
+                    med = mediana_part_cinci[0] 
+                contor = verificare(vector, stanga, dreapta, med) #returneaza si ordoneaza vectorul in ordinea k
                 contor1 = contor - stanga
+                if pas == 1:
+                     solution += 'Numarul ' + str(med) + ' este al ' + str(contor1) + ' lea numar cel mai mic numar din sir '    
                 if (contor1 == k - 1):  
                     return vector[contor]  
                 if (contor1 > k - 1):
