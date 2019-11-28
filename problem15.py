@@ -1,7 +1,7 @@
 from problem import Problem
 import random
 
-class ProblemTest1(Problem):
+class Problem15(Problem):
     def __init__(self):
         data = random.sample(range(100), random.randint(5, 9))
         data = sorted(data)
