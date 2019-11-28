@@ -199,7 +199,7 @@ def FindSolution ():
         statement += "Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta = " + str(Tree[i].right) + "\n"
 
     solution = statement
-    print (solution)
+    #print (solution)
 
     return solution
 
