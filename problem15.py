@@ -206,7 +206,7 @@ def FindSolution ():
 class Problem15(Problem):
 
     def _init_(self):
-        statement = ""
+        statement = "CEVA"
         self.data = 0
 
         super()._init_(statement, data)
