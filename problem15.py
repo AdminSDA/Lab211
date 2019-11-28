@@ -194,12 +194,12 @@ def FindSolution ():
 
     statement += "\nArborele generat este următorul:\n"
 
-    statement += "Nod = 1 Stanga = 2 Dreapta = 3"
+    statement += "Nod = 1 Stanga = 2 Dreapta = 3\n"
     for i in range(1, 9):
-        statement += "Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right) + "\n"
+        statement += "Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta = " + str(Tree[i].right) + "\n"
 
     solution = statement
-    #print (solution)
+    print (solution)
 
     return solution
 
@@ -207,7 +207,7 @@ class Problem15(Problem):
 
     def _init_(self):
         statement = ""
-        data = 0
+        self.data = 0
 
         super()._init_(statement, data)
 
