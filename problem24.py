@@ -13,13 +13,13 @@ class Pheapho:
 
 class Problem24(Problem):
     def __init__(self):
-        self.statement = 'Gasiti un algoritm care va indica care sunt primele '
+        self.statement = 'Gasiti un algoritm care va indica primele '
         self.data = []
         n = random.randint(5, 15)
         k = random.randint(2, 10)
         self.data = [n, k]
         self.statement += str(self.data[0])
-        self.statement += ' numere de forma a + b*sqrt('
+        self.statement += ' numere de forma a + b * sqrt('
         self.statement += str(self.data[1])
         self.statement += '), cu a si b din N si exemplificati algoritmul. Radicalul a fost ales aleator.\n'
         #self.solution = ''
@@ -85,6 +85,10 @@ class Problem24(Problem):
         # inserare elem 0 in heap
         p = Pheapho(0, 0, 0, k)
         self.inserare(li, p)
+        ok = 1
+
+        solution += 'Idee de rezolvare: Cream un MIN_heap. Avem radacina a + b * sqrt(k) si inseram in heap numerele (a + 1) + b * sqrt(k) si a + (b + 1) * sqrt(k). \n'
+        solution += 'Dupa fiecare inserare reechilibram heap-ul. Afisam radacina, decapitam heap-ul si il reechilibram.\n'
 
         while n >= 1:
             rad = li[0]
@@ -114,9 +118,21 @@ class Problem24(Problem):
                 self.dictionar[pereche2] = 1
 
             # decapitare heap
-            solution += str(li[0].c)
-            solution += ' '
+            solution += '\nHeap: '
+            #' ( ' + str(li[0].a) + ' , ' + str(li[0].b) + ' ) ' + ' .\n'
+            length = len(li)
+            for i in range(0, length - 1):
+                solution +=  ' ( ' + str(li[i].a) + ' , ' + str(li[i].b) + ' ) , '
+            solution += ' ( ' + str(li[length - 1].a) + ' , ' + str(li[length - 1].b) + ' ) '
+
+            if ok == 1:
+                solution += '\nPrimul element este: 0\n'
+            else:
+                solution += '\nAl ' + str(ok) + '-lea element este: '
+                solution += str(li[0].a) + ' + ' + str(li[0].b) + ' * sqrt(' + str(k) + ')\n'
+
             self.stergere(li)
+            ok = ok + 1
 
             # actualizam numar elemente de afisat
             n = n - 1
