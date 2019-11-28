@@ -165,9 +165,12 @@ def FindSolution ():
 
     statement += '.\nGenerati arborele asociat.\n'
 
-    statement += '\nArborele generat este următorul:\n'
+
 
     print (statement)
+
+    print("Arborele a fost generat in functie de urmatorul vector: ")
+    print(BTinfo)
 
     #PrintBT(1)
 
@@ -200,12 +203,13 @@ for i in range (0, 9):
 
 for i in range (0, 9):
     if Tree[i].left == Tree[i].data or Tree[i].right == Tree[i].data:
-        del Tree[i]
+        Tree[i].left = 0
+        Tree[i].right = 0
 
+print ("\nArborele generat este următorul:")
 
-(Tree[0]).PrintBinaryTree()
-
-for i in range(0, 10):
-    print (str(Tree[i].data) + " " + str(Tree[i].left) + " " + str(Tree[i].right) )
+print("Nod = 1 Stanga = 2 Dreapta = 3")
+for i in range(1, 10):
+    print ("Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right) )
 
 
