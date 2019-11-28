@@ -176,40 +176,44 @@ def FindSolution ():
 
     solution = statement
 
+    root = Node(1)
+    Tree.append(root)
+
+    for i in range(2, 10):
+        Tree.append(Node(i))
+
+    # root = Tree[0].data
+
+    for i in range(0, 9):
+        if Tree[i].left == None:
+            Tree[i].left = BTinfo[2 * (i + 1) - 1]
+        if Tree[i].right == None:
+            Tree[i].right = BTinfo[2 * (i + 1)]
+
+    for i in range(0, 9):
+        if Tree[i].left == Tree[i].data or Tree[i].right == Tree[i].data:
+            Tree[i].left = 0
+            Tree[i].right = 0
+
+    print("\nArborele generat este următorul:")
+
+    print("Nod = 1 Stanga = 2 Dreapta = 3")
+    for i in range(1, 9):
+        print("Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right))
+
     return solution
 
-class Problem15():
+class Problem15(Problem):
+
+    def _init_(self):
+        statement = ""
+        data = 0
+
+        super()._init_(statement, data)
 
     def solve(self):
         solution = FindSolution()
         return solution
 
-project = Problem15()
-project.solve()
-
-root = Node(1)
-Tree.append(root)
-
-for i in range(2, 10):
-    Tree.append(Node(i))
-
-#root = Tree[0].data
-
-for i in range (0, 9):
-    if Tree[i].left == None:
-        Tree[i].left = BTinfo[2 * (i+1) - 1]
-    if Tree[i].right == None:
-        Tree[i].right = BTinfo[2 * (i+1)]
-
-for i in range (0, 9):
-    if Tree[i].left == Tree[i].data or Tree[i].right == Tree[i].data:
-        Tree[i].left = 0
-        Tree[i].right = 0
-
-print ("\nArborele generat este următorul:")
-
-print("Nod = 1 Stanga = 2 Dreapta = 3")
-for i in range(1, 10):
-    print ("Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right) )
-
-
+#project = Problem15()
+#project.solve()
