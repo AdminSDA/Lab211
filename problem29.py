@@ -134,7 +134,7 @@ class Problem29(Problem):
                 if self.k == 1:
                     solution += 'Primul numar este: ' + str(e) + '\n'
                 else:
-                    solution += 'Numarul al ' + str(self.k) + ' lea cel mai mic element este: ' + str(e) + '\n'
+                    solution += 'Numarul al ' + str(self.k) + ' lea cel mai mic element este ' + str(e) + '\n'
                 solution += 'Se cauta numere mai mici decat numarul: ' + str(self.k) + ' si se ordoneaza: \n'
                 final = []
                 i = 0
@@ -144,6 +144,7 @@ class Problem29(Problem):
                      i = i + 1
                 solution += 'Ordonare completa. Primele ' + str(self.k) + ' elemente sunt: \n'
                 solution += str(final);
-                solution += '\nNumerele sortate sunt: ' + str(final.sort());
+                final.sort();
+                solution += '\nNumerele sortate sunt: ' + str(final); 
                 
         return solution
