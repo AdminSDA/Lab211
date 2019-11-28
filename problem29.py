@@ -144,6 +144,6 @@ class Problem29(Problem):
                      i = i + 1
                 solution += 'Ordonare completa. Primele ' + str(self.k) + ' elemente sunt: \n'
                 solution += str(final);
-                solution += '\nNumerele sortate sunt: ' + str(final);
+                solution += '\nNumerele sortate sunt: ' + str(final.sort());
                 
         return solution
