@@ -98,7 +98,7 @@ class Problem29(Problem):
         super().__init__(statement, data)
  
     def solve(self):
-        solution = 'Implementam primele k numere in vectorul v1 \n'
+        solution = 'Implementam primele ' + str(k) + ' numere in vectorul v1 \n'
         i = 0
         temp = []
         while i < self.k:
