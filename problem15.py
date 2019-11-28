@@ -152,8 +152,8 @@ def FindSolution ():
     #GenerateBTinfo(1, 1, 1, 0)
 
     GenerateRSD (BTinfo[0])
-
-    statement = 'Parcurgerea in preordine (RSD) data este: '
+    statement = ""
+    statement = "Parcurgerea in preordine (RSD) data este: "
 
     for number in RSD:
         if number == 0:
@@ -163,18 +163,15 @@ def FindSolution ():
         else:
             statement += str(number) + ' '
 
-    statement += '.\nGenerati arborele asociat.\n'
+    statement += ".\nGenerati arborele asociat.\n\n"
 
+    statement += "Arborele a fost generat in functie de urmatorul vector: \n"
 
-
-    print (statement)
-
-    print("Arborele a fost generat in functie de urmatorul vector: ")
-    print(BTinfo)
-
+    BTstring = ""
+    for i in BTinfo:
+        BTstring += str(i) + " "
+    statement += BTstring + "\n"
     #PrintBT(1)
-
-    solution = statement
 
     root = Node(1)
     Tree.append(root)
@@ -195,11 +192,14 @@ def FindSolution ():
             Tree[i].left = 0
             Tree[i].right = 0
 
-    print("\nArborele generat este următorul:")
+    statement += "\nArborele generat este următorul:\n"
 
-    print("Nod = 1 Stanga = 2 Dreapta = 3")
+    statement += "Nod = 1 Stanga = 2 Dreapta = 3"
     for i in range(1, 9):
-        print("Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right))
+        statement += "Nod = " + str(Tree[i].data) + " Stanga = " + str(Tree[i].left) + " Dreapta " + str(Tree[i].right) + "\n"
+
+    solution = statement
+    #print (solution)
 
     return solution
 
@@ -213,6 +213,7 @@ class Problem15(Problem):
 
     def solve(self):
         solution = FindSolution()
+        #data = self.data
         return solution
 
 #project = Problem15()
