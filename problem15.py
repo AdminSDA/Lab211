@@ -1,11 +1,27 @@
 import random
-from problem import Problem
+#from problem import Problem
 
 _BTinfo = [1, 5, 4, -1, -1, -1, -1, 9, 8, 3, -1, 0, 0, 0, 0, -1, -1, -1, 2]
-_RSD = [1, 5, 3, -1, -1, -1, 4, 9, -1, 2, -1, -1, 8, -1, -1]
+_RSDcitit = [1, 5, 3, -1, -1, -1, 4, 9, -1, 2, -1, -1, 8, -1, -1]
 
 BTinfo = []
 RSD = []
+
+Tree = []
+
+class Node:
+
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+    def PrintBinaryTree(self):
+        if self.left:
+            self.left.PrintBinaryTree()
+        print(self.data)
+        if self.right:
+            self.right.PrintBinaryTree()
 
 childs = [0] * 10;
 
@@ -151,12 +167,45 @@ def FindSolution ():
 
     statement += '\nArborele generat este următorul:\n'
 
+    print (statement)
+
+    #PrintBT(1)
+
     solution = statement
 
     return solution
 
-class Problem15(Problem):
+class Problem15():
 
     def solve(self):
         solution = FindSolution()
         return solution
+
+project = Problem15()
+project.solve()
+
+root = Node(1)
+Tree.append(root)
+
+for i in range(2, 10):
+    Tree.append(Node(i))
+
+#root = Tree[0].data
+
+for i in range (0, 9):
+    if Tree[i].left == None:
+        Tree[i].left = BTinfo[2 * (i+1) - 1]
+    if Tree[i].right == None:
+        Tree[i].right = BTinfo[2 * (i+1)]
+
+for i in range (0, 9):
+    if Tree[i].left == Tree[i].data or Tree[i].right == Tree[i].data:
+        del Tree[i]
+
+
+(Tree[0]).PrintBinaryTree()
+
+for i in range(0, 10):
+    print (str(Tree[i].data) + " " + str(Tree[i].left) + " " + str(Tree[i].right) )
+
+
