@@ -1,10 +1,12 @@
 from problem import Problem
 import random
+from random import randrange
+
+n = randrange(9, 13, 1)  #se genereaza numarul de noduri
 
 class Problem12(Problem):
     def __init__(self):
         statement="Reconstruiti un arbore oarecare, primind o parcurgere continua in adancime a arborelui, pornind din radacina.\nParcurgerea DFS continua:\n"
-        n = 10  # nr de noduri
 
         class date_nod:
             def __init__(self, valoare, children):
@@ -92,8 +94,8 @@ class Problem12(Problem):
         solution = ""
         vect = self.data
         #solution+='\nparcurgerea este '+str(vect)
-        solution+='Reconstruim arborele plecand de la parcurgerea data\n'
-        vizitat = [0] * 10
+        solution+='\nReconstruim arborele plecand de la parcurgerea data\n'
+        '''vizitat = [0] * 10
         vizitat[vect[0] - 1] = 1
         tata = sptata = [0] * 10
         for i in range(1, len(vect)):
@@ -102,7 +104,7 @@ class Problem12(Problem):
                 vizitat[vect[i] - 1] = 1
         n = 0
 
-        '''def funct(nod, tata, vect, n):
+        def funct(nod, tata, vect, n):
             nr = 0
             #vizitat[nod - 1] = 1
             for i in range(0, len(tata)):
@@ -123,18 +125,19 @@ class Problem12(Problem):
                     n = cop
 
         funct(vect[0], tata, vect, n)'''
-        solution+='Pentru fiecare nod voi afisa fiii lui,incepand de la radacina'
-        vizitat = [0] * 10
+
+        solution+='Pentru fiecare nou voi afisa fii lui'
+        vizitat = [0] * n
         vizitat[vect[0] - 1] = 1
-        tata = sptata = [0] * 10
+        tata = [0] * n
         for i in range(1, len(vect)):
             if vizitat[vect[i] - 1] == 0:
                 tata[vect[i] - 1] = vect[i - 1]
                 vizitat[vect[i] - 1] = 1
-        n = 0
-        vizitat = [0] * 10
+        p = 0
+        vizitat = [0] * n
 
-        def funct(nod, tata, vect, vizitat, n, sol=''):
+        def funct(nod, tata, vect, vizitat, p, sol=''):
             nr = 0
             for i in range(0, len(tata)):
                 if tata[i] == nod:
@@ -145,12 +148,12 @@ class Problem12(Problem):
                 sol += '\n'
                 for i in range(0, len(tata)):
                     if tata[i] == nod:
-                        sol += "\n          " * n + "|---------" + str(i + 1) + '\n'
+                        sol += "\n          " * p + "|---------" + str(i + 1) + '\n'
                 return sol
             else:
                 return
-        vizi = [0] * 10
-        nou = [0] * 10
+        vizi = [0] * n
+        nou = [0] * n
         k = 0
         for i in range(0, len(vect)):
             if vizi[vect[i] - 1] == 0:
@@ -159,7 +162,7 @@ class Problem12(Problem):
                 vizi[vect[i] - 1] = 1
         sol=''
         for i in range(len(tata)):
-            a = funct(nou[i], tata, vect, vizitat, n)
+            a = funct(nou[i], tata, vect, vizitat, p)
             # print("pentrul nodul "+str(nou[i])+":")
             if a == None:
                 continue
@@ -167,3 +170,4 @@ class Problem12(Problem):
                 sol += a
         solution+=sol
         return solution
+
