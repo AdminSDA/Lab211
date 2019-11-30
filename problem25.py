@@ -1,7 +1,7 @@
 import random
-from modules.node import Node
-from modules.Urcare import urca
-from modules.Coborare import coboara
+from node import Node
+from Urcare import urca
+from Coborare import coboara
 from problem import Problem
 
 
@@ -13,12 +13,6 @@ class Problem25(Problem):
         statement += "Introduceti elementele "
         v = random.sample(range(1, 30), 8)
         statement += str(v)
-        ordonat = 1
-        for i in range(7):
-            if(v[i]<v[i+1]):
-                ordonat = 0
-        if(ordonat == 1):
-            random.shuffle(v)
         statement += " intr-un max heap ternal si decapitati heap-ul"
         print(statement)
         data = v
@@ -30,8 +24,48 @@ class Problem25(Problem):
         for i in range(1,8):
             Heap=list(urca(Heap,v[i]))
             solution+='L-am inserat pe '+str(v[i])+' in heap.Heap-ul devine: \n'
-            solution+=str(Heap)
-            solution+='\n'+'\n'
+            solution += str(Heap) + '\n'
+        solution+="Heap-ul inainte de decapitare arata astfel: \n"
+        solution += "   --------"
+        solution += str(Heap[0])
+        if (Heap[0] < 10):
+            solution += '   ----------------\n'
+        else:
+            solution += "--------\n"
+
+        solution += "   |       |        |\n"
+        solution += "---"
+        solution += str(Heap[1])
+        if (Heap[1] < 10):
+            solution += "---   "
+        else:
+            solution += "---   "
+        solution += str(Heap[2])
+        if (Heap[2] < 10):
+            solution += "        "
+        else:
+            solution += "       "
+        solution += str(Heap[3])
+        solution += "\n"
+        solution += "|  |   |   |"
+        solution += "\n"
+        solution += str(Heap[4])
+        if (Heap[4] < 10):
+            solution += "  "
+        else:
+            solution += " "
+        solution += str(Heap[5])
+        if (Heap[5] < 10):
+            solution += "   "
+        else:
+            solution += "  "
+        solution += str(Heap[6])
+        if (Heap[6] < 10):
+            solution += "   "
+        else:
+            solution += "  "
+        solution+=str(Heap[7])
+        solution+='\n'+'\n'
         Heap[0]=Heap[7]
         del Heap[7]
         solution+='Am inteschimbat elementul aflat in capul heap-ului cu cel aflat pe  ultima frunza si am scos ultima frunza \n'
