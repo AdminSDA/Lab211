@@ -65,6 +65,8 @@ class Problem28(Problem):
                     median = hmax[0]
                 elif minsize == maxsize:
                     median = (hmin[0] + hmax[0]) / 2
+                    
+                solution += "Vectorul initial: " + str(v[0:i+1]) + "\n"
 
 
 
