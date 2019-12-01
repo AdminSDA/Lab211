@@ -16,10 +16,13 @@ class Nod:
 
 class Problem14(Problem):
     def __init__(self):
-        statement = "Poate fi urmatorul vector o parcurgere in postordine a unui arbore binar de cautare:\n a="
-        vect = random.sample(range(2,20),10)
-        A=Nod(vect[0])
-
+        statement = "Care dintre urmatorii vectori pot fi o parcurgere in postordine a unui arbore binar de cautare:\n a="
+        vect1 = random.sample(range(2,20),10)
+        A=Nod(vect1[0])
+        vect2 = random.sample(range(2,20),10)
+        B=Nod(vect2[0])
+        vect3 = random.sample(range(2, 20), 10)
+        C = Nod(vect3[0])
         # cream functia de inserare a fiecarui element din vector:
         def inserare(rad, nod):
             # daca valoarea nodului este mai mica decat valoarea radacinii
@@ -71,24 +74,62 @@ class Problem14(Problem):
                 if len(v) <= 0:
                     break
 
-        for i in range(1, len(vect)):
-            inserare(A, Nod(vect[i]))
+        for i in range(1, len(vect1)):
+            inserare(A, Nod(vect1[i]))
+
+        for i in range(1, len(vect2)):
+            inserare(B, Nod(vect2[i]))
+
+        for i in range(1, len(vect3)):
+            inserare(C, Nod(vect3[i]))
 
         postordine(A)
-        data=pord+pord
-        i = 0
-        while pord[i] < pord[len(pord) - 1]:
-            i += 1
-        i -= 1
-        if i > 4:
-            j = random.randint(0, i - 1)
-            data[10 + j] = max(pord) + 1
-        else:
-            j = random.randint(i + 2, len(pord) - 2)
-            data[10 + j] = min(pord) - 1
+        data=pord[0:10]
+        postordine(B)
+        data=data+pord[10:20]
+        postordine(C)
+        data = data + pord[20:30]
+        ch=random.choice([1,2,3])
+        if ch==1:
+            i = 0
+            x = pord[0:10]
+            while x[i] < x[len(x) - 1]:
+                i += 1
+            i -= 1
+            if i > 4:
+                j = random.randint(0, i - 1)
+                data[j] = max(x) + 1
+            else:
+                j = random.randint(i + 2, len(x) - 2)
+                data[j] = min(x) - 1
+        if ch==2:
+            i = 0
+            x = pord[10:20]
+            while x[i] < x[len(x) - 1]:
+                i += 1
+            i -= 1
+            if i > 4:
+                j = random.randint(0, i - 1)
+                data[10 + j] = max(x) + 1
+            else:
+                j = random.randint(i + 2, len(x) - 2)
+                data[10 + j] = min(x) - 1
+        if ch==3:
+            i = 0
+            x = pord[20:30]
+            while x[i] < x[len(x) - 1]:
+                i += 1
+            i -= 1
+            if i > 4:
+                j = random.randint(0, i - 1)
+                data[20 + j] = max(x) + 1
+            else:
+                j = random.randint(i + 2, len(x) - 2)
+                data[20 + j] = min(x) - 1
         a = data[0:10]
         b = data[10:20]
-        statement = statement + str(a) + ",\ndar acesta:\n b=" + str(b)
+        c = data[20:30]
+        statement = statement + str(a) + "\n b=" + str(b) + "\n c=" + str(c)
 
         super().__init__(statement, data)
 
@@ -97,7 +138,7 @@ class Problem14(Problem):
         solution="\n"
         a = data[0:10]
         b = data[10:20]
-
+        c = data[20:30]
         def spl(p, s, d):  # p=vectorul, s=prima pozitie din stanga, d=pozitia radacinii curente
             # cazul pentru "DA": daca s si d au devenit aceeasi pozitie
             if d - s <= 0:
@@ -110,7 +151,8 @@ class Problem14(Problem):
                 if p[j] < p[d]:  # daca exista un element mai mic decat radacina curenta => "NU"
                     raspuns.append(p[j])
                     raspuns.append(p[d])
-                    return False
+                    raspuns.append(j)
+                    return 1
             return spl(p, s, i - 1) & spl(p, i,d - 1)  # repeta algoritmul pentru subarborele stang(rad o sa fie pe poz i-1) si pentru cel drept(rad o sa fie pe pozitia d-1)
 
         # creare arbore:
@@ -160,10 +202,21 @@ class Problem14(Problem):
             solution = solution + "Arborele este:\n\n"
             solution = solution + str(print_imbunatatit(A)) + "\n\n"
         else:
-            solution=solution+"NU\n"
-
+            solution = solution + "NU, deoarece, "
+            x = raspuns[0]
+            y = raspuns[1]
+            solution = solution + str(x) + " < " + str(y) + ","
+            for i in range(0,len(a)):
+                if a[i]==x:
+                    pozx=i
+            for i in range(0,len(a)):
+                if a[i]>y:
+                    elem=a[i]
+                    pozelem=i
+                    break
+            solution = solution + " iar " + str(x) +" este pe pozitia "+ str(pozx) + ", cand ar fi trebuit sa fie pozitionat inainte de "+ str(elem)  + " care se afla pe pozitia "+ str(pozelem)+".\n"
         solution = solution + "pentru b:" + str(b) + " afiseaza: "
-        if spl(b, 0, len(b) - 1):
+        if spl(b, 0, len(b) - 1)==0:
             solution = solution + "DA\n"
             sizeb=len(b)
             B=constructie_arbore(b,sizeb)
@@ -174,6 +227,37 @@ class Problem14(Problem):
             solution = solution + "NU, deoarece, "
             x=raspuns[0]
             y=raspuns[1]
-            solution=solution + str(x)+" < "+str(y) + "."
+            solution = solution + str(x) + " < " + str(y) + ","
+            for i in range(0,len(b)):
+                if b[i]==x:
+                    pozx=i
+            for i in range(0,len(b)):
+                if b[i]>y:
+                    elem=b[i]
+                    pozelem=i
+                    break
+            solution = solution + " iar " + str(x) +" este pe pozitia "+ str(pozx) + ", cand ar fi trebuit sa fie pozitionat inainte de "+ str(elem)  + " care se afla pe pozitia "+ str(pozelem)+".\n"
 
+        solution = solution + "pentru c:" + str(c) + " afiseaza: "
+        if spl(c, 0, len(c) - 1)==0:
+            solution = solution + "DA\n"
+            sizec = len(c)
+            C = constructie_arbore(c, sizec)
+            solution = solution + "\n"
+            solution = solution + "Arborele este:\n\n"
+            solution = solution + str(print_imbunatatit(C)) + "\n\n"
+        else:
+            solution = solution + "NU, deoarece, "
+            x = raspuns[0]
+            y = raspuns[1]
+            solution = solution + str(x) + " < " + str(y) + ","
+            for i in range(0,len(c)):
+                if c[i]==x:
+                    pozx=i
+            for i in range(0,len(c)):
+                if c[i]>y:
+                    elem=c[i]
+                    pozelem=i
+                    break
+            solution = solution + " iar " + str(x) +" este pe pozitia "+ str(pozx) + ", cand ar fi trebuit sa fie pozitionat inainte de numarul "+ str(elem) + " care se afla pe pozitia "+ str(pozelem)+".\n"
         return solution
