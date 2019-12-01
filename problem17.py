@@ -24,7 +24,8 @@ class Problem17(Problem):
         poz_pivot = sir.index(pivot)
         l = len(sir)
 
-        self.solution1 += "\n" + "Pivot: " + str(pivot) + "\n"
+        self.solution1 += "\n" + " Am ales random pivotul: " + str(pivot) + "\n"
+        self.solution1 += " Vectorul dupa partitionarea cu pivotul " + str(pivot) + " arata asa: \n"
 
         while i < j:
             # incrementare i daca e mai mic
@@ -53,13 +54,14 @@ class Problem17(Problem):
             else:
                 Problem17.quickSort_modif(self, sir, low, poz_pivot - 1, k)
         else:
-            self.solution1 += "Am gasit elementul de pe pozitia " + str(k + 1) + ", acesta este " + str(sir[k]) + ".\n "
+            self.solution1 += " Am gasit elementul de pe pozitia " + str(k + 1) + ", acesta este " + str(sir[k]) + ".\n "
 
     def solve(self):
         sir = self.data[0]
         k = self.data[1] - 1
         l = self.data[2]
-        self.solution1 += "Aplicam quick sort modificat"
+        self.solution1 +="Cautam elementul de pe pozitia " + str(k+1) + ".\n"
+        self.solution1 += "Aplicam quick sort modificat.\n"
         Problem17.quickSort_modif(self, sir, 0, l - 1, k)
         # solution = str(sir)
         return  self.solution1
