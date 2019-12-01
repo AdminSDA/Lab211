@@ -1,8 +1,8 @@
 from problem import Problem
 import random
 from random import sample
-#from arbore import Node
-#from arbore import Tree
+
+COUNT= 10
 
 class Node():
 
@@ -41,6 +41,7 @@ class Node():
             res.append(root.data)
             res = res + self.inorder(root.right)
         return res
+
 class Tree():
 
     def __init__(self):
@@ -53,24 +54,17 @@ class Tree():
             self.root = Node(data)
             return True
 
-    def inorder(self):
-        if self.root is not None:
-            return self.root.inorder(data)
-        else:
-            return False
+
 
 class Problema13(Problem):
     def __init__(self):
         statement = ""
         nr_noduri = 7
         v = sample(range(1, 20), nr_noduri)
-        i = random.randint(1,7)
-        rad=v[i]
+        rad=v[0]
         root = Node(rad)
-        statement += "Radacina este " + str(rad) + "\n"
 
         for i in range(len(v)):
-            statement += "Inseram in ABC nodul " + str(v[i]) + "\n"
             root.insert(v[i])
 
         sdr = root.postorder(root)
@@ -79,44 +73,42 @@ class Problema13(Problem):
         statement += "Se da urmatoarea parcurgere in postordine (SDR) a unui arbore binar de cautare: " + str(sdr)
         statement += "\nReconstruiti arborele."
 
-        statement += "\nParcurgerea in inordine (SRD) a arborelui este: " + str(srd)
         print(statement)
-        data = [srd, rad]
+        data = [srd, rad,root]
 
         super().__init__(statement, data)
 
     def solve(self):
+
         srd = self.data[0]
         rad = self.data[1]
+        root= self.data[2]
         solution = ""
-        
-        space = ' '
-        v1 = []
-        v2 = []
-        rad = self.data[1]
-        for i in range(7):
-            if(srd[i] < rad):
-                v1.append(srd[i])
-            if(srd[i] > rad):
-                v2.append(srd[i])
-        
-        solution += str(v1) + str(rad) + str(v2) + "\n"
-        solution += 10*space + "______" + str(rad) + "______" + "\n"
-        solution += 9*space + "/" + 14*space + "\\" + "\n"
-        solution += 5*space + "___" + str(v1[1]) + "___" + 10*space + "___" + str(v2[1]) + "___" + "\n"
+        solution= "\nRadacina arborelui este " +str(rad)
+        solution+= "\nParcurgerea in inordine (SRD) a arborelui este: " + str(srd) +"\n"
 
-        i = 0
+        def print2DUtil(root, space, pretty=""):
+            if (root == None):
+                return ''
 
-        while(i != len(v1)-1):
-            if(v1[i] < v1[i-1]):
-                solution += 4*space + "/" + 7*space + "\\" +"\n"
-                solution += 3*space + str(v1[i])
-                i = i + 1
-                if(v1[i] > v1[i-1]):
-                    solution += 8*space + str(v1[i])
-                    i = i +1
-            else: #(v1[i] > v1[i-1]):
-                i = i + 1
+            space += COUNT
+
+            pretty += print2DUtil(root.right, space)
+
+            pretty += '\n'
+            pretty += ' ' * (space - COUNT)
+            pretty += str(root.data)
+            pretty += print2DUtil(root.left, space)
+            return pretty
+
+        def print2D(root):
+            s = print2DUtil(root, 0)
+            return s
+
+        solution += "\nArborele reconstruit din SDR+SRD este: " +"\n"
+        solution+= str(print2D(root))
+
+
         return solution
         
 
