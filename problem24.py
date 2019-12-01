@@ -129,7 +129,7 @@ class Problem24(Problem):
                 solution += '\nPrimul element este: 0\n'
             else:
                 solution += '\nAl ' + str(ok) + '-lea element este: '
-                solution += str(li[0].a) + ' + ' + str(li[0].b) + ' * sqrt(' + str(k) + ')\n'
+                solution += str(li[0].a) + ' + ' + str(li[0].b) + ' * sqrt(' + str(k) + ') = ' + str(li[0].c) + ' \n'
 
             self.stergere(li)
             ok = ok + 1
