@@ -57,18 +57,13 @@ def despartire(vecmax, k, solution):
              
 class Problem29(Problem):
     def __init__(self):
-        # Lungimea vectorului este intre 6-15 elemente (1-100)
+        # Lungimea vectorului este intre 6-30 elemente (1-100)
         lungime = random.randint(6, 30)
         k = random.randint(1, lungime);
+        sir = [];
         sir = random.sample(range(1, 100), lungime)
         # Adaugam 0 la final
-        sir[lungime - 1] = 0
-        nr1 = random.randint(1, lungime);
-        nr2 = random.randint(1, lungime);
-        nr3 = random.randint(1, lungime);
-        sir[nr1] = 0
-        sir[nr2] = 0
-        sir[nr3] = 0
+        sir[lungime] = 0;
         statement = 'Primiti numere naturale > 0 si atunci cand primiti 0, trebuie sa afisati cele mai mari k elemente.\n '
         statement += 'Se dau numerele: ' + ', '.join(map(str, sir)) + '.\n k = ' + str(k) + '\n'
         super().__init__(statement, sir)
