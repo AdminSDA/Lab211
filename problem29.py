@@ -36,39 +36,42 @@ def eliminare(vector, k, temp):
         i = i + 1;
     
     
-def despartire(vecmax, k, solution):
-    e = len(vecmax);
-    i = 0;
-    counter = 0;
-    vector = [];
-    while i < e:
-        if len(vector) >= k and vecmax[i] == 0:
-                        solution += 'Index ' + str(counter) + '\nVectorul este:\n'
-                        solution += str(vector) + '\nDupa algoritm vectorul devine: \n'
-                        temp = [];
-                        algorithm(vector, k, temp)
-                        solution += temp + '\n'
-                        vector = temp;
-                        counter = counter + 1;
-        
-        if vecmax[i] != 0:
-            vector.append(vecmax[i]);
-        i = i + 1;
              
 class Problem29(Problem):
     def __init__(self):
         # Lungimea vectorului este intre 6-30 elemente (1-100)
         lungime = random.randint(6, 30)
-        k = random.randint(1, lungime);
+        self.k = random.randint(1, lungime);
         data = [];
         data = random.sample(range(1, 100), lungime)
         # Adaugam 0 la final
-        data[lungime] = 0;
+        data[lungime-1] = 0;
+        a1 = random.randint(self.k, lungime - self.k);
+        a2 = random.randint(1, self.k);
+        data[a1]=0;
+        data[a2]=0;
         statement = 'Primiti numere naturale > 0 si atunci cand primiti 0, trebuie sa afisati cele mai mari k elemente.\n '
-        statement += 'Se dau numerele: ' + ', '.join(map(str, data)) + '.\n k = ' + str(k) + '\n'
+        statement += 'Se dau numerele: ' + ', '.join(map(str, data)) + '.\n k = ' + str(self.k) + '\n'
         super().__init__(statement, data)
 
     def solve(self):
         solution=""
-        despartire(self.data, self.k, solution)
-        return solution
+        vecmax = self.data;    
+        e = len(vecmax);
+        i = 0;
+        counter = 0;
+        vector = [];
+        while i < e:
+            if len(vector) >= self.k and vecmax[i] == 0:
+                        solution += 'Index ' + str(counter) + '\nVectorul este:\n'
+                        solution += str(vector) + '\nDupa algoritm vectorul devine: \n'
+                        temp = [];
+                        algorithm(vector, self.k, temp)
+                        solution += str(temp) + '\n'
+                        vector = temp;
+                        counter = counter + 1;
+        
+            if vecmax[i] != 0:
+               vector.append(vecmax[i]);
+            i = i + 1;
+        return solution;
