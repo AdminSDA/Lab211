@@ -71,7 +71,7 @@ class Problem29(Problem):
         sir[nr3] = 0
         statement = 'Primiti numere naturale > 0 si atunci cand primiti 0, trebuie sa afisati cele mai mari k elemente.\n '
         statement += 'Se dau numerele: ' + ', '.join(map(str, sir)) + '.\n k = ' + str(k) + '\n'
-        super().__init__(statement, data)
+        super().__init__(statement, sir)
 
     def solve(self):
         solution=""
