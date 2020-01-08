@@ -29,7 +29,7 @@ class Problem41(Problem):
                     if ((muchie.nod1 == j.nod1) and (muchie.nod2 == j.nod2) or (muchie.nod1 == j.nod2) and (muchie.nod2 == j.nod1)): #verifica daca muchia se afla in lista de muchii deja
                         ok = True
                         break
-                if ok == False: #daca muchia nu se afla in lista de muchii deja se adauga
+                if ok == False: #daca muchia nu se afla in lista de muchii deja, se adauga
                     break
             data.append(graph(muchie.nod1,muchie.nod2,muchie.cost))
 
