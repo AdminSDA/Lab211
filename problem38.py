@@ -26,14 +26,12 @@ def return_all(key1, key2, c1, c2):
             if c2 < c1:
                  return 'A'
             else:
-                if(key1.count('D')==1):
                     return 'B'
                    
         if(key1.count('C')>=1 and key2 == 'A'):
             if c2 < c1:
                  return 'A'
             else:
-                 if(key1.count('C')==1):
                      return 'B'            
                      
                      
@@ -41,7 +39,6 @@ def return_all(key1, key2, c1, c2):
             if c1 < c2:
                  return 'A'
             else:
-                 if(key2.count('D')==1):
                     return 'B'
                  
                  
@@ -49,23 +46,86 @@ def return_all(key1, key2, c1, c2):
             if c1 < c2:
                  return 'A'
             else:
-                 if(key2.count('C')==1):
                     return 'B'
          
-        if(key1.count('A')==1 and key1.count('B')==1 and key1.count('C')==1 and key2=='E'):
+        if(key1.count('A')>=1 and key1.count('B')>=1 and key1.count('C')>=1 and key2=='E'):
                 if c1 < c2:
                     return 'B'
        
                    
-        if(key2.count('A')==1 and key2.count('B')==1 and key2.count('C')==1 and key1=='E'):
+        if(key2.count('A')>=1 and key2.count('B')>=1 and key2.count('C')>=1 and key1=='E'):
                  if c2 > c1:
                     return 'B'  
+                    
+        if(key1.count('D')>=1 and key1.count('B')>=1 and key1.count('C')>=1 and key2=='E'):
+                if c1 < c2:
+                    return 'B'
+       
                    
+        if(key2.count('D')>=1 and key2.count('B')>=1 and key2.count('C')>=1 and key1=='E'):
+                 if c2 > c1:
+                    return 'B'    
+                
+        if(key1.count('B')>=1 and key1.count('C')>=2 and key2=='E'):
+                if c1 < c2:
+                    return 'B'
+       
+                   
+        if(key2.count('B')>=1 and key2.count('C')>=2 and key1=='E'):
+                 if c2 > c1:
+                    return 'B'  
+                    
+        if(key1.count('B')>=1 and key1.count('D')>=2 and key2=='E'):
+                if c1 < c2:
+                    return 'B'
+       
+                   
+        if(key2.count('B')>=1 and key2.count('D')>=2 and key1=='E'):
+                 if c2 > c1:
+                    return 'B'              
+                   
+        if(key1.count('A')>=1 and key2 == 'E'):
+            if c2 < c1:
+                 return 'C'
+            else:
+                    return 'B'           
+        
+        if(key1.count('C')>=1 and key2 == 'E'):
+            if c2 < c1:
+                 return 'C'
+            else:
+                    return 'B'
+                   
+        if(key1.count('D')>=1 and key2 == 'E'):
+            if c2 < c1:
+                 return 'C'
+            else:
+                    return 'B' 
+             
+             
+        if(key2.count('A')>=1 and key1 == 'E'):
+            if c1 < c2:
+                 return 'C'
+            else:
+                    return 'B'           
+        
+        if(key2.count('C')>=1 and key1 == 'E'):
+            if c1 < c2:
+                 return 'C'
+            else:
+                    return 'B'
+                   
+        if(key2.count('D')>=1 and key1 == 'E'):
+            if c1 < c2:
+                 return 'C'
+            else:
+                    return 'B'    
+         
                    
         else:
             return 'C'            
  
-class Problem38(Problem):
+class Problem29(Problem):
     def __init__(self):
         statement = "Alegeti pentru fiecare propozitie, care dintre afirmatiile A, B, sau C se potriveste cel mai bine:\n"
         statement+= "A. Adevarat, indiferent de mesaje.\n"
@@ -103,6 +163,7 @@ class Problem38(Problem):
             i = i + 1;
         nodes = sorted(nodes, key=lambda x: x[1], reverse=True)
         solution+=str(nodes) + '\n';
+        returned_key=0;
         while len(nodes) >= 2:
             e = nodes[-1]
             f = nodes[-2]
@@ -120,6 +181,7 @@ class Problem38(Problem):
         if(returned_key == 'B'):
                 solution+="Fals, indiferent de propozite\n'";
  
-        else:
+        if(returned_key == 'C'):
                 solution+='In functie de propozitie\n';
+                
         return solution;
