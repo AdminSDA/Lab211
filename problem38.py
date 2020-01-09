@@ -125,7 +125,7 @@ def return_all(key1, key2, c1, c2):
         else:
             return 'C'            
  
-class Problem29(Problem):
+class Problem38(Problem):
     def __init__(self):
         statement = "Alegeti pentru fiecare propozitie, care dintre afirmatiile A, B, sau C se potriveste cel mai bine:\n"
         statement+= "A. Adevarat, indiferent de mesaje.\n"
