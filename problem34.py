@@ -148,7 +148,7 @@ def generare_inserare(v, waiting_list, ABC):
 
 class Problem34(Problem):
     def __init__(self):
-        v = random.sample(range(1, 20), 6)
+        v = random.sample(range(4, 20), 6)
         numberNodes = 6
         min1 = min(v)
         min2 = 1000
