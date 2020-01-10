@@ -51,13 +51,16 @@ class Problem30(Problem):
                     else:
                         LCS[i][j] = max(LCS[i - 1][j], LCS[i][j - 1])
 
-            solution+= "\n Matricea LCS este: "
-            solution+= "\n"
+            solution+= "\n Calculam valorile matricei LCS ce are pe linie sirul initial, iar pe diagonala sirul scris invers."
+            solution += '\n Se ia fiecare element de pe coloana si se compara cu elementele sirului de pe linie dupa regula urmatoare:\n'
+            solution += '       * daca elementele sunt egale => LCS[i][j] = 1 + LCS[i - 1][j - 1] \n'
+            solution += '       * daca elementele nu sunt egale => LCS[i][j] = max(LCS[i - 1][j], LCS[i][j - 1])\n'
             for i in range(len(LCS)):
                 for j in range(len(LCS)):
-                    solution+= str(LCS[i][j])
+                    solution+= '\t' + str(LCS[i][j])
                 solution+= "\n"
 
+            solution += ' Numarul de litere care trebuie introdus este diferenta dintre lungimea sirului si ultimul element al matrice.\n'
             ultim_elem = LCS[l][l]
             nr_litere = l - ultim_elem
 
