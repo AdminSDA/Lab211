@@ -41,7 +41,7 @@ class Problem29(Problem):
     def __init__(self):
         # Lungimea vectorului este intre 6-30 elemente (1-100)
         lungime = random.randint(6, 30)
-        self.k = random.randint(1, lungime);
+        self.k = random.randint(3, lungime);
         data = [];
         data = random.sample(range(1, 100), lungime)
         # Adaugam 0 la final
