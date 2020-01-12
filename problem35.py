@@ -2,7 +2,7 @@ import random
 from random import sample
 from problem import Problem
 
-
+COUNT = [10]
 class Fifo():
     def __init__(self, val):
         self.val = val
@@ -86,6 +86,25 @@ class Problem35(Problem):
         nod = self.SRR(nod)
         return nod
 
+    def print2DUtil(self, root, space, w):
+        if (root == None):
+            return
+
+        space += COUNT[0]
+
+        self.print2DUtil(root.dr, space, w)
+
+        w.append('\n')
+        for i in range(COUNT[0], space):
+            w.append(' ')
+        w.append(root.val)
+
+        self.print2DUtil(root.st, space, w)
+
+    def print2D(self, root, w):
+        self.print2DUtil(root, 0, w)
+
+
     def inserare_avl(self, act, value):
         if act is None:
             return Fifo(value)
@@ -117,6 +136,8 @@ class Problem35(Problem):
         n = self.data[0]
         v = self.data[1]
 
+        solution += '(Afisare folosind preordinea) \n'
+
         rad = None
 
         for i in range(0, n):
@@ -128,6 +149,11 @@ class Problem35(Problem):
                 solution += str(w[i])
                 solution += ' '
             solution += '\n'
+
+        s = []
+        self.print2D(rad, s)
+        for i in range(0, len(s)):
+            solution += str(s[i])
 
         return solution
 
