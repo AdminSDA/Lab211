@@ -46,10 +46,15 @@ class Problem29(Problem):
         data = random.sample(range(1, 100), lungime)
         # Adaugam 0 la final
         data[lungime-1] = 0;
-        a1 = random.randint(self.k, lungime - self.k);
-        a2 = random.randint(1, self.k);
-        data[a1]=0;
-        data[a2]=0;
+        while(true):
+          a1 = random.randint(self.k, lungime - self.k);
+          a2 = random.randint(1, self.k);
+          if a1 != a2:
+             data[a1]=0;
+             data[a2]=0;
+             break;
+          else: 
+             continue;
         statement = 'Primiti numere naturale > 0 si atunci cand primiti 0, trebuie sa afisati cele mai mari k elemente.\n '
         statement += 'Se dau numerele: ' + ', '.join(map(str, data)) + '.\n k = ' + str(self.k) + '\n'
         super().__init__(statement, data)
