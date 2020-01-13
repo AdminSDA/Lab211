@@ -1,4 +1,5 @@
 import random
+import queue
 from problem import Problem
 
 
@@ -128,6 +129,33 @@ def insert(root, node):
                 else:
                     insert(root.left, node)
 
+def afisareArbore(v):
+    global solution
+    AB = 100 *[]
+    AB.append(v[0])
+    for i in range(64):
+        AB += [1000]
+        "Aborele binar de cautare va fi retinut in felul urmator:"
+        "Fiul stang al elementului de indice k e cel de indice  2*k+1 iar cel drept de indice 2*k+2"
+        "Daca in loc de o valore in intervalul [1,50] e 1000 ,atunci locul e gol"
+    solution += "\n"
+    for x in v[1:len(v)]:
+        poz = 0
+        while (AB[poz] != 1000):
+            if (x < AB[poz]):
+                poz = 2 * poz + 1
+            else:
+                poz = 2 * poz + 2
+        AB[poz] = x
+    i = 1
+    while i < 32:
+        for k in range(0, int(64 / (2 * i))): solution += " "
+        for j in range(i, i * 2):
+            if (AB[j - 1] != 1000): solution += str(AB[j - 1])
+            for k in range(0, int(64 / i)): solution += " "
+        solution += '\n'
+        i = i * 2
+    solution += "\n"
 
 def generare_inserare(v, waiting_list, ABC):
     global solution
@@ -148,7 +176,7 @@ def generare_inserare(v, waiting_list, ABC):
 
 class Problem34(Problem):
     def __init__(self):
-        v = random.sample(range(4, 20), 6)
+        v = random.sample(range(1, 20), 6)
         numberNodes = 6
         min1 = min(v)
         min2 = 1000
@@ -207,6 +235,7 @@ class Problem34(Problem):
         solution += ("\n")
         solution += ("Pas2: Pentru a obtine un arbore AVL trebuie sa adaugam noduri pana cand ponderea fiecarui nod este 1, 0 sau -1. \nDaca ponderea gasita este mai mica decat -1, nodurile vor fi adaugate in dreapta, daca este mai mare decat 1, le adaugam in stanga.\n")
         solution += ("Pas3: Repetam pasul 2 pana cand toate ponderile sunt 1,0 sau -1\n")
+        solution += ("Observatie: Trebuie sa pastram structura de arbore binar, deci nodurile adaugate trebuie sa fie unice.\n")
         for j in range(5):
             echilibrare(root)
             sdr(root)
@@ -224,7 +253,18 @@ class Problem34(Problem):
         v = printInorder(root, v)
         solution += ("Parcurgerea SRD dupa echilibrare: ")
         solution += str(v)
+        v = []
+        coada = queue.Queue(100)
+        coada.put(root)
+        while(coada.empty() != 1):
+            x = coada.get()
+            v.append(x.val)
+            if (x.left != None):
+                coada.put(x.left)
+            if (x.right != None):
+                coada.put(x.right)
+        afisareArbore(v)
         return solution
-
+print(Problem34().solve())
 
 
