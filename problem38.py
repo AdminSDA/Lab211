@@ -1,5 +1,6 @@
 import random;
-import string;        
+import string;   
+import Problem from problem
  
 def random_char(y):
        return ''.join(random.choice(string.ascii_uppercase) for x in range(y))
